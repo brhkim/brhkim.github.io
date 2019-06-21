@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Student Achievement by Group</title>
+
+	<style>
+
+		body {
+			font: 10px sans-serif;
+			margin:auto;
+			max-width:1000px;
+		}
+
+		#titlespace {
+			margin-left:140px;
+			margin-right:100px;
+			/* Match margin-bottom to margin.top for svg container*/
+			padding-bottom:40px;
+			border-bottom: 1px solid #999999;
+		}
+
+		#titlecopy {
+			font-family: Tahoma;
+			font-weight:bold;
+			color:#000000;
+			font-size:22px;
+			text-align:center;
+		}
+
+		.subtitletext {
+			padding-top:15px;
+			text-anchor: left;
+			font-family: Tahoma;
+			font-size: 10px;
+			color: #666;
+			max-width: 400;
+		}
+
+		#selectortable {
+			margin-left:150px;
+			table-layout:fixed;
+			border-collapse:collapse;
+			text-align:left;
+			vertical-align:top;
+			width:850px;
+			font-family:Tahoma;
+			font-size: 10px;
+		}
+
+		#selectortable td {
+			vertical-align:top;
+			padding-top:0px;
+		}
+
+		#byline {
+			margin-left:100px;
+			margin-right:100px;
+			text-align: center;
+			font-family: Tahoma;
+			font-size: 9px;
+			color: #666;
+			padding: 10px;
+			max-width: 400;
+		}
+
+		.axis path,
+		.axis line, 
+		.axis1 path,
+		.axis1 line {
+			fill: none;
+			stroke: #E6E7E8;
+			shape-rendering: crispEdges;
+		}
+
+		.x.axis path, .x.axis1 path {
+			display: none;
+		}
+
+		.line {
+			fill: none;
+			stroke-width: 1.5px;
+		}
+
+		.legend-box {
+			cursor: pointer;
+		}
+
+		#mouse-tracker {
+			stroke: #E6E7E8;
+			stroke-width: 1px;
+		}
+
+		.hover-line { 
+			stroke: #E6E7E8;
+			fill: none;
+			stroke-width: 1px;
+			left: 10px;
+			shape-rendering: crispEdges;
+			opacity: 1;
+		}
+
+		.hover-text {
+			stroke: none;
+			font-size: 30px;
+			font-weight: bold;
+			fill: #000000;
+		}
+
+		.tooltip {
+			font-weight: normal;
+			text-anchor: end;
+		}
+
+		.brush .extent {
+			stroke: #FFF;
+			shape-rendering: crispEdges;
+		}
+
+		/* Fancy footwork to create the custom radio buttons */
+		[type="radio"]:checked,
+		[type="radio"]:not(:checked) {
+			position: absolute;
+			left: -9999px;
+		}
+
+		[type="radio"]:checked + label,
+		[type="radio"]:not(:checked) + label
+		{
+			position: relative;
+			padding-left: 20px;
+			cursor: pointer;
+			line-height: 16px;
+			display: inline-block;
+			color: #666;
+			margin-top:3px;
+		}
+
+		[type="radio"]:checked + label:before,
+		[type="radio"]:not(:checked) + label:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 14px;
+			height: 14px;
+			border: 1px solid #ddd;
+			border-radius: 100%;
+			background: #fff;
+		}
+
+		[type="radio"]:checked + label:after,
+		[type="radio"]:not(:checked) + label:after {
+			content: '';
+			width: 8px;
+			height: 8px;
+			background: #ea5661;
+			position: absolute;
+			top: 4px;
+			left: 4px;
+			border-radius: 100%;
+			-webkit-transition: all 0.2s ease;
+			transition: all 0.2s ease;
+		}
+
+		[type="radio"]:not(:checked) + label:after {
+			opacity: 0;
+			-webkit-transform: scale(0);
+			transform: scale(0);
+		}
+
+		[type="radio"]:checked + label:after {
+			opacity: 1;
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+		<br>
+
+		<div id="titlespace">
+
+			<p id="titlecopy">Revisualizing Student Achievement</p>
+
+			<p class="subtitletext">The following interactive graphic was created as a proposed redesign for the current <a href=http://schoolquality.virginia.gov/>"School Quality Profiles"</a> (SQPs) from the Virginia Department of Education (VDOE). The primary goals of this redesign are three-fold: <b>(a)</b> Present the currently available information in a clear, easy-to-understand, and easy-to-navigate format; <b>(b)</b> Facilitate comparisons across groups of students, over time; and <b>(c)</b> Allow users to quickly focus on the information they feel is most relevant to them. This redesign is a small step in the broader task of improving the usability and utility of the SQPs for the VDOE, the public, and other stakeholders.</p>
+			<p class="subtitletext">The line graph format was selected for its legibility, flexibility, and simplicity. First, line graphs are among the most common graphs out there, meaning that most of the public will be familiar and comfortable with reading them. Second, line graphs serve as a reliable tool to examine any numeric trends over time. As <i>most</i> of the information presented in the SQPs are longitudinal and numeric in nature, the below graph can be refitted to display a large bulk of the information currently housed on the SQPs. This is preferable to the current format - a mixture of bar charts, tables, and pie graphs - because it puts all of that information in a common visual "language" for the viewer, reducing cognitive load and confusion when moving between metrics. Lastly, it facilitates comparisons between datapoints by allowing the use of multiple lines/groups at once without increasing the complexity of what is seen. </p>
+			<p class="subtitletext">The interactive elements further simplify the overall experience of navigating the SQPs. For example, creating a series of buttons to switch between subject (reading, math, etc.), test (3rd Grade through EOC), proficiency group (passing, failing, etc.), and student group (gender, race, socioeconomics, etc.) condenses several sets of graphs into one, and puts thousands of datapoints at the fingertips of the user in an approachable and digestible format.</p>
+			<p class="subtitletext">The below example uses the Grade 8 Reading SOL scores from Thomas C. Boushall Middle School, part of the Richmond City Public Schools division.</p>
+
+		</div>
+
+<script src="http://d3js.org/d3.v3.js"></script>
+
+<script>
+
+	// Original code for interactive line chart created by DSTruth at
+	// http://bl.ocks.org/DStruths/9c042e3a6b66048b5bd4#index.html
+
+	//Set main SVG and layout vars
+	var fontsize = 10
+
+	var margin = {top: 70, right: 300, bottom: 50, left: 200},
+		width = 960 - margin.left - margin.right,
+		height = 500 - margin.top - margin.bottom;
+
+	var parseDate = d3.time.format("%Y").parse;
+	
+	var bisectDate = d3.bisector(function(d) { return d.date; }).left;
+
+	var xScale = d3.time.scale()
+		.range([0, width]);
+
+	var yScale = d3.scale.linear()
+		.range([height, 0]);
+
+	// custom colors for the lines
+	var color = d3.scale.ordinal().range(["#18c61a", "#9817ff", "#d31911", "#24b7f1", "#fa82ce", "#736c31", "#1263e2", "#18c199", "#ed990a", "#f2917f", "#7b637c", "#a8b311", "#a438c0", "#d00d5e", "#1e7b1d", "#05767b", "#aaa1f9", "#a5aea1", "#a75312", "#026eb8", "#94b665", "#91529e", "#caa74f", "#c90392", "#a84e5d", "#6a4cf1", "#1ac463", "#d89ab1", "#3c764d", "#2dbdc5", "#fb78fa", "#a6a9cd", "#c1383d", "#8b614e", "#73be38", "#ff8d52", "#cea37e", "#b53c7e", "#656d61", "#436f90", "#5e7304", "#82b792", "#fb88a3", "#dd8df2", "#6a5cc0", "#d098d5", "#ac15dc", "#a4543b", "#76b4cc", "#6963a4", "#8e620d", "#77adf8", "#c9a918", "#99537d", "#acaf7d", "#7850d5", "#ae3a9f", "#68bd74", "#e09d60", "#1069cd", "#d50438", "#c03d17", "#79b6af", "#517430", "#db9b94", "#095cf8", "#b1b045", "#c0a4a9", "#bc01c1", "#906033", "#e49c3f", "#8e4db9", "#bb3a64"]);
+
+	var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom")
+		.ticks(d3.time.year, 1);
+
+	var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left");
+
+	var line = d3.svg.line()
+		.x(function(d) { return xScale(d.date); })
+		.y(function(d) { return yScale(d.rating); })
+		.defined(function(d) { return d.rating; });// Hiding line value defaults of 0 for missing data
+
+	var maxY = 100; // Set the max value of Y possible in the graph
+
+	var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom) //height + margin.top + margin.bottom
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// Create invisible rect for mouse tracking
+	svg.append("rect")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("x", 0) 
+		.attr("y", 0)
+		.attr("id", "mouse-tracker")
+		.style("fill", "white"); 
+
+	//Start data callback function
+	d3.tsv("https://raw.githubusercontent.com/brhkim/brhkim.github.io/master/achievementdatatest2.tsv", function(error, data) { 
+		
+		// Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
+		color.domain(d3.keys(data[0]).filter(function(key) { 
+			return key !== "date"; 
+		}));
+
+		// Make every date in the csv data a javascript date object format
+		data.forEach(function(d) { 
+			d.date = parseDate(d.date);
+		});
+
+		// Nest the data into an array of objects with new keys
+		var categories = color.domain().map(function(name) { 
+
+			return {
+
+				// "name": the csv headers except date
+				name: name,
+
+				// "values": which has an array of the dates and ratings
+				values: data.map(function(d) { 
+
+					return {
+						date: d.date, 
+						rating: +(d[name]),
+					};
+
+				}),
+
+				// "visible": by default turn everything invisible except for the "All" categories of each level of aggregation.
+				visible: (name.includes("All") ? 
+						true : false)
+
+			};
+
+		});
+
+		// extent = highest and lowest points, domain is data, range is bounding box
+		xScale.domain(d3.extent(data, function(d) { 
+			return d.date; 
+		})); 
+
+		yScale.domain([0, maxY]);
+
+		// draw line graph
+		svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," + height + ")")
+			.call(xAxis);
+
+		// y-axis header
+		svg.append("g")
+			.attr("class", "y axis")
+			.call(yAxis)
+			.append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", -50)
+			.attr("x", 0)
+			.attr("dy", ".71em")
+			.style("text-anchor", "end")
+			.text("Percent of Students")
+			.style("pointer-events", "none");
+
+		// Select nested data and append to new svg group elements
+		var issue = svg.selectAll(".issue")
+			.data(categories) 
+			.enter().append("g")
+			.attr("class", "issue"); 
+
+		// Draw the actual graph lines
+		issue.append("path")
+			.attr("class", "line")
+			// Stop line interferring with cursor
+			.style("pointer-events", "none") 
+			// Give line id of line-(insert issue name, with any spaces replaced with no spaces)
+			.attr("id", function(d) {
+				return "line-" + d.name.replace(/\s/g, "").replace("/", ""); 
+			})
+			.attr("d", function(d) { 
+				return line(d.values); 
+			})
+			// If array key "visible" = true then draw line, if not then don't 
+			.style("opacity", function(d) { 
+				return d.visible ? 1 : 0.05;
+			})
+			//use clip path to make irrelevant part invisible
+			.attr("clip-path", "url(#clip)")
+			.style("stroke", function(d) { 
+				return color(d.name); 
+			});
+
+		// Draw the points for each graph line
+		// Get number of years to determine number of points to loop through
+		var dates = categories[0].values.length
+
+		// Loop through number of years and draw circles for each category, for each year
+		for (i = 0; i < dates; i++) {
+			issue.append("circle")
+				.attr("id", function(d) {
+					return "points-" + d.name.replace(/\s/g, "").replace("/", ""); 
+				})
+				.attr("cx", function(d) {
+					return xScale(d.values[i].date)
+				})
+				.attr("cy", function(d) {
+						return yScale(d.values[i].rating)
+				})
+				.attr("r", function(d) {
+					if (d.values[i].rating != 0) {
+						return 4
+					} else {
+						return 0
+					}
+				})
+				.style("fill", function(d) { 
+					return color(d.name); 
+				})
+				.style("pointer-events", "none") 
+				.style("opacity", function(d) { 
+					return d.visible ? 1 : 0;
+				});
+		}
+
+
+		// draw legend
+		var catlength = categories.length/3
+
+		var legendSpace = 300 / (categories.length/3);
+
+		//State, Division, School column headers
+		svg.append("text")
+			.attr("x", -35)
+			.attr("y", width + margin.right/8 + 10)
+			.attr("transform", "rotate(-90)")
+			.text("State")
+
+		svg.append("text")
+			.attr("x", -35)
+			.attr("y", width + margin.right/8 + 30)
+			.attr("transform", "rotate(-90)")
+			.text("Division")
+
+		svg.append("text")
+			.attr("x", -35)
+			.attr("y", width + margin.right/8 + 50)
+			.attr("transform", "rotate(-90)")
+			.text("School")
+
+		//Draw selector boxes
+		issue.append("rect") // width is 16
+			.attr("width", function(d, i) {
+				// Change width of the rect to 0 (making it invisible) if there are no datapoints for that group
+				var sum = 0
+				for (z = 0; z < dates; z++) {
+					sum = sum + d.values[z].rating
+				}
+				if (sum === 0) {
+					return 0;
+				} else {
+					return 16;
+				}
+			})
+			.attr("height", 12)
+			.attr("x", function(d, i) {
+				if (d.name.includes("State")) {
+					return width + margin.right/8
+				}
+				if (d.name.includes("Division")) {
+					return width + margin.right/8 + 20
+				}		
+				if (d.name.includes("School")) {
+					return width + margin.right/8 + 40
+				}
+			}) 
+			.attr("y", function (d, i) { 
+				return (legendSpace)+((i%catlength)*(legendSpace)) + 30
+			})
+			.attr("fill",function(d) {
+				// If array key "visible" = true then color rect, if not then make it grey
+				return d.visible ? color(d.name) : "#F1F1F2"; 
+			})
+			.attr("class", "legend-box")
+			.style("opacity", 1)
+
+			//On-click function for Legend boxes
+			.on("click", function(d){ 
+				// On click make d.visible 
+				d.visible = !d.visible;
+
+				// Redefine axis just in case
+				yScale.domain([0,maxY]);
+
+				svg.select(".y.axis")
+					.transition()
+					.call(yAxis); 
+
+				issue.select("path")
+					.transition()
+					.attr("d", function(d){
+						return line(d.values);
+					})
+					.style("opacity", function(d) {
+						// If array key "visible" = true then draw line, if not then dim 
+						return d.visible ? 1 : 0.05; 
+					});
+
+				issue.selectAll("#points-" + d.name.replace(/\s/g, "").replace("/", ""))
+					.transition()
+					.style("opacity", function(d) {
+						// If array key "visible" = true then draw line, if not then dim 
+						return d.visible ? 1 : 0; 
+					});
+
+				issue.select("rect")
+					.transition()
+					.attr("fill", function(d) {
+						return d.visible ? color(d.name) : "#F1F1F2";
+					})
+					.style("opacity", 1);
+
+			})
+
+			// Legend Box mouseover function
+			.on("mouseover", function(d){
+
+				d3.select(this)
+					.transition()
+					.attr("fill", function(d) { 
+						return color(d.name); 
+					})
+					.style("opacity", 0.5);
+
+				d3.select("#line-" + d.name.replace(/\s/g, "").replace("/", ""))
+					.transition()
+					.style("stroke-width", 3.5)
+					.style("opacity", 1);
+
+				d3.selectAll("#points-" + d.name.replace(/\s/g, "").replace("/", ""))
+					.transition()
+					.style("opacity", 1)
+
+			})
+
+			// Legend Box mouseout function
+			.on("mouseout", function(d){
+
+				d3.select(this)
+					.transition()
+					.attr("fill", function(d) {
+						return d.visible ? color(d.name) : "#F1F1F2";
+					})
+					.style("opacity", 1);
+
+				d3.select("#line-" + d.name.replace(/\s/g, "").replace("/", ""))
+					.transition()
+					.style("stroke-width", 1.5)
+					.style("opacity", function(d) {
+						return d.visible ? 1 : 0.05; 
+					});
+
+				d3.selectAll("#points-" + d.name.replace(/\s/g, "").replace("/", ""))
+					.transition()
+					.style("opacity", function(d) {
+						return d.visible ? 1 : 0; 
+					})
+
+			})
+
+		//Draw text labels for each category
+		issue.append("text")
+			.attr("x", width + margin.right/8 + 65) 
+			.attr("y", function (d, i) { 
+				return (legendSpace)+((i%catlength)*(legendSpace)) + 40; 
+			})
+			.text(function(d) { 
+				if (d.name.includes("State")) {
+					return d.name.replace("State_", "").replace("All", "All Students").replace(/\_/g, " "); 
+				}
+			}); 
+
+		// Create separators between categories of demographics
+		issue.append("line")
+			.attr("x1", width + margin.right/8 + 65)
+			.attr("x2", width + margin.right/8 + 165)
+			.attr("y1", function (d, i) {
+				return (legendSpace)+((i%catlength)*(legendSpace)) + 46; 
+			})
+			.attr("y2", function (d, i) {
+				return (legendSpace)+((i%catlength)*(legendSpace)) + 46; 
+			})
+			.style("stroke", "#999999")
+			.style("stroke-width", 1)
+			.style("opacity", function (d, i) {
+				if (d.name.includes("All") || d.name.includes("Male") || d.name.includes("Two") || d.name.includes("Migrant") || d.name.includes("Not") || d.name.includes("Without")) {
+					return 1;
+				} else {
+					return 0;
+				}
+			});
+
+		//Create a reset box
+		svg.append("rect")
+			.attr("width", 56)
+			.attr("height", 12)
+			.attr("x", function(d, i) {
+				return width + margin.right/8
+			}) 
+			.attr("y", function (d, i) { 
+				return (legendSpace) + legendSpace*(catlength) + 30
+			})
+			.attr("fill",function(d) {
+				return "#BBBBBB";
+			})
+			.attr("class", "reset-box")
+			.style("opacity", 1)
+			.style("cursor", "pointer")
+			.on("mouseover", function(d) {
+				d3.select(this).transition().style("fill", "#969696")
+			})
+			.on("mouseout", function(d) {
+				d3.select(this).transition().style("fill", "#BBBBBB")
+			})
+			.on("click", function(z) {
+				for (i = 0; i < categories.length; i++) {
+					categories[i].visible = 0
+				}
+				issue.select("path")
+					.transition()
+					.style("opacity", 0.05); 
+
+				issue.selectAll("circle")
+					.transition()
+					.style("opacity", 0); 
+
+				issue.selectAll(".legend-box")
+					.transition()
+					.attr("fill", "#F1F1F2")
+			})
+
+		// Create reset text
+		svg.append("text")
+			.attr("x", function(d, i) {
+				return width + margin.right/8 + 65
+			}) 
+			.attr("y", function (d, i) { 
+				return (legendSpace) + legendSpace*(catlength) + 40
+			})
+			.text("Clear Selection")
+
+		// Draw the hover line 
+		var hoverLineGroup = svg.append("g") 
+			.attr("class", "hover-line");
+
+		var hoverLine = hoverLineGroup
+			.append("line")
+			.attr("id", "hover-line")
+			.attr("x1", 10).attr("x2", 10) 
+			.attr("y1", 0).attr("y2", height + 10)
+			.style("pointer-events", "none") // Stop line interferring with cursor
+			.style("opacity", 0); // Set opacity to zero 
+
+		// Draw the date-year in the bottom-right corner of the box
+		var hoverDate = hoverLineGroup
+			.append('text')
+			.attr("class", "hover-text")
+			.attr("y", height - (20)) // hover date text position
+			.attr("x", width - 80) // hover date text position
+			.style("fill", "#c4c4c4");
+
+		//grab your column names minus the date column
+		var columnNames = d3.keys(data[0]).filter(function(key) { 
+			return key !== "date"; 
+		});
+
+		var focus = issue.select("g")
+			.data(columnNames)
+			.enter().append("g")
+			.attr("class", "focus"); 
+
+		// Draw the tooltip boxes to track each drawn line
+		focus.append("rect")
+			.attr("class", "tooltipbox")
+			.attr("width", function(d) { 
+				return fontsize * 1.7 
+			})
+			.attr("height", function(d) { 
+				return fontsize * 1.7 
+			})
+			.attr("x", 0)
+			.attr("y", height)
+			.attr("rx", 3)
+			.attr("ry", 3)
+			.style("stroke-width", 1)
+			.style("opacity", 0)
+			.style("pointer-events", "none")
+			.style("stroke", "grey")
+			.attr("id", function(d) {
+				return "tooltipbox-" + d.replace(/\s/g, "").replace("/", "");
+			});
+
+		// Draw the text number for each drawn line
+		focus.append("text")
+			.attr("class", "tooltip")
+			.style("opacity", 0)
+			.style("pointer-events", "none")
+			.attr("x", 0) // position tooltips
+			.attr("y", height)
+			.attr("id", function(d) {
+				return "tooltip-" + d.replace(/\s/g, "").replace("/", "");
+			});
+
+		// Add mouseover events for hover line.
+		d3.select("#mouse-tracker")
+			// on mousemove activate mousemove function defined below
+			.on("mousemove", mousemove) 
+			.on("mouseout", function() {
+				// Make everything invisible for the tooltip on mouseout
+				hoverDate
+					.text(null)
+
+				d3.select("#hover-line")
+					.transition()
+					.style("opacity", 0);
+
+				d3.selectAll(".tooltip")
+					.transition()
+					.style("opacity", 0);
+
+				d3.selectAll(".tooltipbox")
+					.transition()
+					.style("opacity", 0);
+			});
+
+		// Define the mousemove function to follow the mouse cursor on the graph
+		function mousemove() {
+
+			var visiblecheck = []
+
+			for (i = 0 ; i < columnNames.length; i = i + 1) {
+					visiblecheck.push(categories[i]["visible"]);
+			}
+
+			// Finding mouse x position on rect
+			var mouse_x = d3.mouse(this)[0]; 
+			
+			// Format hover date text to show the currently hovered year
+			var format = d3.time.format('%Y'); 
+			
+			// Move the line to where the mouse is on the graph and make visible
+			d3.select("#hover-line") 
+				.attr("x1", mouse_x) 
+				.attr("x2", mouse_x)
+				.style("opacity", 1);
+
+			// Run some fancy footwork to determine which set of date data are closest to where the mouse currently is
+			var x0 = xScale.invert(d3.mouse(this)[0]),
+			i = bisectDate(data, x0, 1),
+	
+			d0 = data[i - 1],
+			d1 = data[i],
+
+			// d is now the data row for the date closest to the mouse position
+			d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+
+			// scale mouse position to xScale date and format it to show month and year
+			hoverDate.text(format(d.date)); 
+			
+			// Set the text of each tooltip to be the datapoint of the given line, which is inherited because there were no data set explicitly on the text elements
+			focus.select("text")
+				.text(function(columnName){
+					if (d[columnName] == 0) {
+						return d[columnName]
+					}
+					if (d[columnName] != 0) {
+						return (columnName.replace("State", "State, ").replace("Division", "Division,").replace("School", "School,").replace(/\_/g, " ")) + ("\xa0\xa0\xa0")+ (d[columnName]);
+					}
+				});
+
+			// Position the tooltips for each line within the tooltip boxes
+			focus.select(".tooltip")
+				.transition()
+				.duration(40)
+				.attr("x", function (columnName) {
+					if (d[columnName] > 9) {
+						return mouse_x - 24
+					}
+					if (d[columnName] < 10) {
+						return mouse_x - 27
+					}
+				})
+				.attr("y", function (columnName) { 
+					return yScale(d[columnName]); 
+				})
+				.attr("fill",function(d, i) {
+					return color(d); 
+				});
+
+			// Position the tooltip boxes to be by their corresponding line and by the hover line
+			focus.select(".tooltipbox")
+				.transition()
+				.duration(40)
+				.attr("x", function(d) { 
+					return mouse_x - 30 - 0.8*(fontsize)
+				})
+				.attr("y", function (columnName) { 
+					return (yScale(d[columnName]))-1.2*fontsize; 
+				});
+
+
+
+			focus.select(".tooltipbox")
+				.attr("fill", function(columnName) {
+					if (d[columnName] == 0) {
+						return "none"; 
+					}
+					if (d[columnName] > 0) {
+						return "white"; 
+					}
+				})
+				.style("stroke-width", function(columnName) {
+					if (d[columnName] == 0) {
+						return 0; 
+					}
+					if (d[columnName] > 0) {
+						return 1; 
+					}
+				});
+
+			// Make only the tooltip boxes for visible lines visible
+			svg.selectAll(".focus .tooltipbox")
+				.data(visiblecheck)
+				.style("opacity", function(d, i) {
+					return d ? 1 : 0;
+				});
+
+			// Make only the tooltips for visible lines visible
+			svg.selectAll(".focus .tooltip")
+				.data(visiblecheck)
+				.style("opacity", function(d, i) {
+					return d ? 1 : 0;
+				});
+
+		}; // End mousemove function
+
+
+	}); // End Data callback function
+
+</script>
+
+	<div>
+
+		<table id="selectortable">
+
+			<tr>
+
+				<th>Assessment Subject</th>
+				<th>Test Category</th>
+				<th>Proficiency Group</th>
+
+			</tr>
+
+			<tr>
+
+				<td>
+					<!-- Create selectors for the subject -->
+					<input type="radio" name="subjectselect" value="reading" checked="checked" id="readradio">
+						<label for="readradio"> Reading</label> <br> 
+					<input type="radio" name="subjectselect" value="writing" id="writeradio">
+						<label for="writeradio"> Writing</label> <br> 
+					<input type="radio" name="subjectselect" value="math" id="mathradio">
+						<label for="mathradio"> Math</label> <br> 
+					<input type="radio" name="subjectselect" value="science" id="sciradio">
+						<label for="sciradio"> Science</label> <br> 
+					<input type="radio" name="subjectselect" value="history" id="histradio">
+						<label for="histradio"> History</label> <br> 
+				
+				</td>
+
+				<td>
+					<!-- Create selectors for the test -->
+					<input type="radio" name="testselect" value="2" id="6radio"> 
+						<label for="6radio"> Grade 6</label> <br>
+					<input type="radio" name="testselect" value="3" id="7radio"> 
+						<label for="7radio"> Grade 7</label> <br>
+					<input type="radio" name="testselect" value="4" checked="checked" id="8radio"> 
+						<label for="8radio"> Grade 8</label> <br>
+					
+				</td>
+				
+				<td>
+					<!-- Create selectors for the proficiency -->
+					<input type="radio" name="profselect" value="-1" checked="checked" id="passradio"> 
+						<label for="passradio"> Passed</label> <br>
+					<input type="radio" name="profselect" value="0" id="failradio"> 
+						<label for="failradio"> Failed</label> <br>
+					<input type="radio" name="profselect" value="1" id="advradio"> 
+						<label for="advradio"> Advanced</label> <br>
+					<input type="radio" name="profselect" value="2" id="profradio"> 
+						<label for="profradio"> Proficient</label> <br>
+					
+				</td>
+
+			</tr>
+
+		</table>
+
+		<br>
+
+		<br>
+
+		<br>
+
+	</div>
+
+	<div>
+		<p id="byline">Visualization by Brian Heseung Kim. <a href = "https://twitter.com/brhkim">Twitter</a>/<a href = "https://github.com/brhkim">GitHub</a>/<a href = "https://brhkim.com/">Web</a>: @brhkim <br>
+		This work is intended only as a proof-of-concept for interactive data visualizations. All opinions expressed are my own. Code heavily modified from work by DStruth <a href="http://bl.ocks.org/DStruths/9c042e3a6b66048b5bd4#index.html">here</a>.</p>
+	</div>
+
+</body>
+
+
+</html>
