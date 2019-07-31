@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Student Enrollment by Group</title>
+
+
+<!-- Styles -->
+<style>
+		body {
+			font: 11px sans-serif;
+			margin:auto;
+			max-width:1000px;
+		}
+
+    #chartdiv {
+      width: 85%;
+      height: 475px;
+      margin-left:80px;
+    }
+
+    #titlespace {
+      margin-left:140px;
+      margin-right:100px;
+      /* Match margin-bottom to margin.top for svg container*/
+      padding-bottom:40px;
+      border-bottom: 1px solid #999999;
+    }
+
+    #titlecopy {
+      font-family: Tahoma;
+      font-weight:bold;
+      color:#000000;
+      font-size:22px;
+      text-align:center;
+    }
+
+    .subtitletext {
+      padding-top:15px;
+      text-anchor: left;
+      font-family: Tahoma;
+      font-size: 10px;
+      color: #666;
+    }
+
+    #byline {
+      margin-left:100px;
+      margin-right:100px;
+      text-align: center;
+      font-family: Tahoma;
+      font-size: 9px;
+      color: #666;
+      padding: 10px;
+    }
+
+    #selectortable {
+      margin-left:100px;
+      table-layout:fixed;
+      border-collapse:collapse;
+      text-align:left;
+      vertical-align:top;
+      width:850px;
+      font-family:Tahoma;
+      font-size: 10px;
+    }
+
+    #selectortable td {
+      vertical-align:top;
+      padding-top:0px;
+      font: 11px sans-serif;
+    }
+
+
+    /* Fancy footwork to create the custom radio buttons */
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    [type="radio"]:checked + label,
+    [type="radio"]:not(:checked) + label
+    {
+      position: relative;
+      padding-left: 20px;
+      cursor: pointer;
+      line-height: 16px;
+      display: inline-block;
+      color: #666;
+      margin-top:3px;
+    }
+
+    [type="radio"]:checked + label:before,
+    [type="radio"]:not(:checked) + label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #ddd;
+      border-radius: 100%;
+      background: #fff;
+    }
+
+    [type="radio"]:checked + label:after,
+    [type="radio"]:not(:checked) + label:after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #ea5661;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+
+    [type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+
+    [type="radio"]:checked + label:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+
+</style>
+</head>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+<body>
+
+
+    <br>
+
+    <div id="titlespace">
+
+      <p id="titlecopy">Revisualizing Student Demographics and Enrollment</p>
+
+      <p class="subtitletext">The following interactive graphic was created as a proposed redesign for the current <a href=https://schoolquality.virginia.gov/>"School Quality Profiles"</a> (SQPs) from the Virginia Department of Education (VDOE). The primary goals of this redesign are three-fold: <b>(a)</b> Present the currently available information in a clear, easy-to-understand, and easy-to-navigate format; <b>(b)</b> Facilitate comparisons across groups of students, over time; and <b>(c)</b> Allow users to quickly focus on the information they feel is most relevant to them. This redesign is a small step in the broader task of improving the usability and utility of the SQPs for the VDOE, the public, and other stakeholders.</p>
+      <p class="subtitletext">Currently, the SQPs use standard pie charts to display demographic breakdowns for student enrollment. While this is a well-known format and is broadly legible, it has several drawbacks. Most notably for this purpose, it makes examining compositional change over time very difficult. The 100% stacked area chart format was selected for its ability to display the relative sizes of groups to a whole over time more clearly. While not necessarily familiar to all audiences, its similarity to traditional line graphs makes approaching it less daunting a task than most other formats.</p>
+      <p class="subtitletext">Implied in this redesign is the consolidation of several of the currently available pie charts into one visualization, as well. For example, creating a series of buttons to switch between level of aggregation (e.g. state, division, school), demographic characteristics (e.g. race, homeless status, etc.), and grade levels, condenses several sets of graphs into one, and puts thousands of datapoints at the fingertips of the user in an approachable and digestible format.</p>
+      <p class="subtitletext">The below example uses the statewide student enrollment broken down by racial and ethnic groups. Note also that the selector buttons at the bottom are currently inactive and are for proof-of-concept only. Any thoughts, feedback, or ideas are greatly appreciated at this stage! See contact info below to get in touch, and thanks for viewing.</p>
+
+    </div>
+
+<br>
+<br>
+<br>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_material);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [{
+  "year": "2016",
+  "white": 640399,
+  "black": 291033,
+  "hispanic": 194673,
+  "asian": 87658,
+  "americanindian": 3588,
+  "nativehawaiian": 1974,
+  "two": 68841
+}, {
+  "year": "2017",
+  "white": 632875,
+  "black": 289040,
+  "hispanic": 203381,
+  "asian": 90377,
+  "americanindian": 3489,
+  "nativehawaiian": 1974,
+  "two": 71617
+}, {
+  "year": "2018",
+  "white": 624688,
+  "black": 285929,
+  "hispanic": 208712,
+  "asian": 92114,
+  "americanindian": 3412,
+  "nativehawaiian": 1974,
+  "two": 73585
+}];
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "year";
+categoryAxis.title.text = "";
+categoryAxis.renderer.minGridDistance = 20;
+categoryAxis.cursorTooltipEnabled = false;
+categoryAxis.renderer.grid.template.location = 0.5;
+categoryAxis.renderer.grid.template.strokeOpacity = 0;
+        categoryAxis.renderer.ticks.template.disabled = false;
+        categoryAxis.renderer.ticks.template.length = 5;
+         categoryAxis.renderer.ticks.template.strokeOpacity = 1;
+        categoryAxis.renderer.ticks.template.strokeWidth = 1;
+        categoryAxis.renderer.ticks.template.stroke = "#E6E7E8";
+        categoryAxis.renderer.ticks.template.location = 0.5;
+
+categoryAxis.startLocation = 0.5;
+categoryAxis.endLocation = 0.5;
+
+
+var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.title.text = "Percent of Students";
+valueAxis.title.valign = "top";
+valueAxis.calculateTotals = true;
+valueAxis.min = 0;
+valueAxis.max = 100;
+valueAxis.cursorTooltipEnabled = false;
+valueAxis.renderer.grid.template.strokeOpacity = 0;
+valueAxis.strictMinMax = true;
+
+        valueAxis.renderer.ticks.template.disabled = false;
+        valueAxis.renderer.ticks.template.length = 8;
+        valueAxis.renderer.ticks.template.strokeOpacity = 1;
+        valueAxis.renderer.ticks.template.strokeWidth = 1;
+        valueAxis.renderer.ticks.template.stroke = "#E6E7E8";
+        valueAxis.renderer.ticks.template.location = 0.5;
+
+valueAxis.renderer.labels.template.adapter.add("text", function(text) {
+  return text;
+});
+
+// Create series
+var series = chart.series.push(new am4charts.LineSeries());
+series.dataFields.valueY = "white";
+series.dataFields.valueYShow = "totalPercent";
+series.dataFields.categoryX = "year";
+series.name = "White";
+
+series.fillOpacity = 0.4;
+series.stacked = true;
+
+// static
+series.legendSettings.labelText = "White";
+series.legendSettings.valueText = "";
+series.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet = series.bullets.push(new am4charts.CircleBullet());
+bullet.circle.radius = 3;
+bullet.circle.strokeWidth = 2;
+
+
+
+var series2 = chart.series.push(new am4charts.LineSeries());
+series2.dataFields.valueY = "black";
+series2.dataFields.valueYShow = "totalPercent";
+series2.dataFields.categoryX = "year";
+series2.name = "Black";
+
+series2.fillOpacity = 0.4;
+series2.stacked = true;
+
+// static
+series2.legendSettings.labelText = "Black";
+series2.legendSettings.valueText = "";
+series2.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
+bullet2.circle.radius = 3;
+bullet2.circle.strokeWidth = 2;
+
+var series3 = chart.series.push(new am4charts.LineSeries());
+series3.dataFields.valueY = "hispanic";
+series3.dataFields.valueYShow = "totalPercent";
+series3.dataFields.categoryX = "year";
+series3.name = "Hispanic";
+
+series3.fillOpacity = 0.4;
+series3.stacked = true;
+
+// static
+series3.legendSettings.labelText = "Hispanic";
+series3.legendSettings.valueText = "";
+series3.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
+bullet3.circle.radius = 3;
+bullet3.circle.strokeWidth = 2;
+
+
+var series4 = chart.series.push(new am4charts.LineSeries());
+series4.dataFields.valueY = "asian";
+series4.dataFields.valueYShow = "totalPercent";
+series4.dataFields.categoryX = "year";
+series4.name = "Asian";
+
+series4.fillOpacity = 0.4;
+series4.stacked = true;
+
+// static
+series4.legendSettings.labelText = "Asian";
+series4.legendSettings.valueText = "";
+series4.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
+bullet4.circle.radius = 3;
+bullet4.circle.strokeWidth = 2;
+
+
+var series5 = chart.series.push(new am4charts.LineSeries());
+series5.dataFields.valueY = "americanindian";
+series5.dataFields.valueYShow = "totalPercent";
+series5.dataFields.categoryX = "year";
+series5.name = "American Indian";
+
+series5.fillOpacity = 0.4;
+series5.stacked = true;
+
+var bullet5 = series5.bullets.push(new am4charts.CircleBullet());
+bullet5.circle.radius = 3;
+bullet5.circle.strokeWidth = 2;
+
+// static
+series5.legendSettings.labelText = "American Indian";
+series5.legendSettings.valueText = "";
+series5.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+
+var series6 = chart.series.push(new am4charts.LineSeries());
+series6.dataFields.valueY = "nativehawaiian";
+series6.dataFields.valueYShow = "totalPercent";
+series6.dataFields.categoryX = "year";
+series6.name = "Native Hawaiian";
+
+series6.fillOpacity = 0.4;
+series6.stacked = true;
+
+// static
+series6.legendSettings.labelText = "Native Hawaiian";
+series6.legendSettings.valueText = "";
+series6.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet6 = series6.bullets.push(new am4charts.CircleBullet());
+bullet6.circle.radius = 3;
+bullet6.circle.strokeWidth = 2;
+
+
+var series7 = chart.series.push(new am4charts.LineSeries());
+series7.dataFields.valueY = "two";
+series7.dataFields.valueYShow = "totalPercent";
+series7.dataFields.categoryX = "year";
+series7.name = "Two or More Races";
+
+series7.fillOpacity = 0.4;
+series7.stacked = true;
+
+// static
+series7.legendSettings.labelText = "Two or More \nRaces";
+series7.legendSettings.valueText = "";
+series7.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+
+var bullet7 = series7.bullets.push(new am4charts.CircleBullet());
+bullet7.circle.radius = 3;
+bullet7.circle.strokeWidth = 2;
+
+
+// Add cursor
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.lineY.disabled = true;
+chart.cursor.lineX.stroke = "#FFFFFF";
+chart.cursor.lineX.strokeWidth = 2;
+chart.cursor.lineX.strokeDasharray = "";
+
+// add legend
+chart.legend = new am4charts.Legend();
+chart.legend.position = "right";
+chart.legend.reverseOrder = true;
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
+
+
+  <div>
+
+    <table id="selectortable">
+
+      <tr>
+
+        <th>Level</th>
+        <th>Student Groupings</th>
+        <th></th>
+
+      </tr>
+
+      <tr>
+
+        <td>
+          <!-- Create selectors for the level -->
+          <input type="radio" name="levelselect" value="state" checked="checked" id="stateradio">
+            <label for="stateradio"> State</label> <br> 
+          <input type="radio" name="levelselect" value="division" id="divisionradio">
+            <label for="divisionradio"> Division</label> <br> 
+          <input type="radio" name="levelselect" value="school" id="schoolradio">
+            <label for="schoolradio"> School</label> <br> 
+        
+        </td>
+
+        <td>
+          <!-- Create selectors for the subject -->
+          <input type="radio" name="groupselect" value="race" checked="checked" id="raceradio">
+            <label for="raceradio"> Race and Ethnicity</label> <br> 
+          <input type="radio" name="groupselect" value="disability" id="disabilityradio">
+            <label for="disabilityradio"> Students with Disabilities</label> <br> 
+          <input type="radio" name="groupselect" value="econ" id="econradio">
+            <label for="econradio"> Economically Disadvantaged</label> <br> 
+          <input type="radio" name="groupselect" value="english" id="englishradio">
+            <label for="englishradio"> English Learners</label> <br> 
+        
+        </td>
+
+        <td>
+          <input type="radio" name="groupselect" value="migrant" id="migrantradio">
+            <label for="migrantradio"> Migrant</label> <br> 
+          <input type="radio" name="groupselect" value="homeless" id="homelessradio">
+            <label for="homelessradio"> Homeless</label> <br> 
+          <input type="radio" name="groupselect" value="foster" id="fosterradio">
+            <label for="fosterradio"> Foster</label> <br> 
+         <input type="radio" name="groupselect" value="grade" id="graderadio">
+            <label for="graderadio"> Grade Levels</label> <br> 
+        </td>
+
+      </tr>
+
+    </table>
+
+    <br>
+
+    <br>
+
+    <br>
+
+  </div>
+
+
+  <div>
+    <p id="byline">Visualization by Brian Heseung Kim. <a href = "https://twitter.com/brhkim">Twitter</a>/<a href = "https://github.com/brhkim">GitHub</a>/<a href = "https://brhkim.com/">Web</a>: @brhkim <br>
+    This work is intended only as a proof-of-concept for interactive data visualizations. All opinions expressed are my own. Code adapted from library and templates by amCharts <a href="https://www.amcharts.com/demos/100-stacked-area-chart/">here</a>.</p>
+  </div>
+
+</body>
