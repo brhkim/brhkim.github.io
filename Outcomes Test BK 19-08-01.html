@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="http://d3js.org/d3.v4.js"></script>
+
+<!-- Load color palettes -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<html lang="en">
+
+	<head>
+
+		<title>Revisualizing the Labor Market Outcomes of Community College Graduates</title>
+
+		<style>
+
+			body {
+				font: 11px sans-serif;
+				margin:auto;
+				max-width:1000px;
+			}
+
+			#titlespace {
+				margin-left:140px;
+				margin-right:100px;
+				/* Match margin-bottom to margin.top for svg container*/
+				padding-bottom:40px;
+				border-bottom: 1px solid #666;
+			}
+
+			#titlecopy {
+				font-family: Tahoma;
+				font-weight:bold;
+				color:#000000;
+				font-size:22px;
+				text-align:center;
+			}
+
+			.subtitletext {
+				padding-top:15px;
+				text-anchor: left;
+				font-family: Tahoma;
+				font-size: 10px;
+				color: #666;
+				max-width: 400;
+			}
+
+			#selectortable {
+				margin-left:90px;
+				table-layout:fixed;
+				border-collapse:collapse;
+				text-align:left;
+				vertical-align:top;
+				width:85%;
+				font-family:Tahoma;
+				font-size: 10px;
+			}
+
+			#selectortable td {
+				vertical-align:top;
+				padding-top:5px;
+			}
+
+			#byline {
+				margin-left:100px;
+				margin-right:100px;
+				text-align: center;
+				font-family: Tahoma;
+				font-size: 9px;
+				color: #666;
+				padding: 10px;
+				max-width: 400;
+			}
+
+			.tooltip {
+				background-color: "white";
+				border: solid;
+				border-width: 1px;
+				border-radius: 4px;
+				padding: 10px;
+				width: 700px;
+				text-align: center;
+				font-family: Tahoma;
+				font-size: 10px;
+				margin-left: 160px;
+				color: #666;
+			}
+
+			/* Fancy footwork to create the custom radio buttons */
+			[type="radio"]:checked,
+			[type="radio"]:not(:checked) {
+				position: absolute;
+				left: -9999px;
+			}
+
+			[type="radio"]:checked + label,
+			[type="radio"]:not(:checked) + label
+			{
+				position: relative;
+				padding-left: 20px;
+				cursor: pointer;
+				line-height: 16px;
+				display: inline-block;
+				color: #666;
+				margin-top:3px;
+			}
+
+			[type="radio"]:checked + label:before,
+			[type="radio"]:not(:checked) + label:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 14px;
+				height: 14px;
+				border: 1px solid #ddd;
+				border-radius: 100%;
+				background: #fff;
+			}
+
+			[type="radio"]:checked + label:after,
+			[type="radio"]:not(:checked) + label:after {
+				content: '';
+				width: 8px;
+				height: 8px;
+				background: #ea5661;
+				position: absolute;
+				top: 4px;
+				left: 4px;
+				border-radius: 100%;
+				-webkit-transition: all 0.2s ease;
+				transition: all 0.2s ease;
+			}
+
+			[type="radio"]:not(:checked) + label:after {
+				opacity: 0;
+				-webkit-transform: scale(0);
+				transform: scale(0);
+			}
+
+			[type="radio"]:checked + label:after {
+				opacity: 1;
+				-webkit-transform: scale(1);
+				transform: scale(1);
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<br>
+
+		<div id="titlespace">
+
+			<p id="titlecopy">Revisualizing the Labor Market Outcomes of Community College Graduates</p>
+
+			<p class="subtitletext">Community colleges can be engines of economic mobility, providing students with the skills they need to find meaningful and stable employment. However, research shows that the specific college a student attends is strongly predictive of their resulting labor market outcomes after graduation - and to make matters more complicated, there exists substantial variation in outcomes even within the same college depending on the program of study and student demographic groups. Lastly, graduates of some colleges and programs might find higher wages after graduation, but it seems that higher wages do not always come with other positive outcomes like increased likelihood of employment or higher stability of job. In other words, the overall economic benefit of a community college degree may be a much more complicated thing to understand than we give it credit for.</p>
+			<p class="subtitletext">So how can we communicate this complexity to the public and other stakeholders? And, moreover, how can we empower the public to actually <i>make sense</i> of such complex information when gathering information about what and where to study? The dashboard below is my best attempt at conceptualizing just that. Using "heatmap" visualizations with robust interactive elements, users can explore thousands of datapoints and make meaningful comparisons across colleges, programs, student groups, and outcomes. Reactive options, clear labels, and a "tooltip" that explains the data in plain language all work together to make navigating this rich information more accessible and approachable. </p>
+			<p class="subtitletext">For now, note that all of the following data are fictional and procedurally generated, as this is solely a proof-of-concept for experimentation/discussion/illustration. Any thoughts, feedback, or ideas are greatly appreciated at this stage! See contact info below to get in touch, and thanks for viewing. </p>
+
+		</div>
+
+		<!-- Create a div where the graph will take place -->
+
+		<div id="my_dataviz">
+		</div>
+
+		<!-- Create a div where the tooltip will take place -->
+		<div id="tooltipper" style="opacity: 0"><br><br>
+		</div>
+
+		<!-- Create a div where the scale will take place -->
+		<div id="scalelegend">
+		</div>
+
+		<br>
+
+		<script type="text/javascript">
+
+			//set the dimensions and margins of the graph
+			var margin = {top: 40, right: 30, bottom: 60, left: 200},
+			width = 864 - margin.left - margin.right,
+			height = 417 - margin.top - margin.bottom;
+
+			//append the svg object to the body of the page
+			var svg = d3.select("#my_dataviz")
+				.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform",
+					"translate(" + margin.left + "," + margin.top + ")");
+
+			//make a container for the axes of the heatmap
+			svg.append("g")
+				.attr("id", "xaxis");
+
+			svg.append("g")
+				.attr("id", "yaxis");
+
+			//make a container for the scale display
+			var scalelegend = d3.select("#scalelegend")
+				.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", 60)
+				.append("g")
+
+			var scalebar = scalelegend.append("g")
+
+			scalelegend.append("text")
+				.attr("id", "scalelower")
+				.attr("x", margin.left-40)
+				.attr("y", 0)
+				.attr("text-anchor", "left")
+				.style("font-family", "Tahoma")
+				.style("fill", "#666")
+				.style("font-size", "10px")
+				.style("opacity", "0")
+				.text("Lower")
+
+			scalelegend.append("text")
+				.attr("id", "scalehigher")
+				.attr("x", margin.left+width+10)
+				.attr("y", 0)
+				.attr("text-anchor", "right")
+				.style("font-family", "Tahoma")
+				.style("fill", "#666")
+				.style("font-size", "10px")
+				.style("opacity", "0")
+				.text("Higher")
+
+			//make the scale slider icon
+			scalelegend.append("g")
+				.append("rect")
+				.attr("id","scaleslider")
+				.style("opacity", 0)
+				//arbitrarily set it in the middle to start
+				.attr("x", 500)
+
+			//read the data
+			d3.csv("https://raw.githubusercontent.com/brhkim/brhkim.github.io/master/heatmapdata.csv", function(data) {
+
+				//Set up default selector values and groupings for x and y axis
+				var myGroups = d3.map(data, function(d){
+						return d.coll;
+					})
+					.keys()
+
+				var myVars = d3.map(data, function(d){
+						return d.prog;
+					})
+					.keys()
+
+				var ageselector = -1
+				var agename = ""
+				var raceselector = -1
+				var racename = ""
+				var femaleselector = -1
+				var femalename = ""
+				var metric = "wage"
+				var scaleselector = 0
+
+				//Set up number formatting
+				var numfix = d3.format(",.2f")
+
+
+				//create default color range and set default graph
+				colorrange(data);
+				draw(data.filter(d => (d.age==ageselector && d.race==raceselector && d.female==femaleselector)))
+
+				//create event watcher and updater for age selector
+				d3.selectAll(("input[name='ageselect']")).on("change", function() {
+
+					var data_new = data.filter(d => (d.age == this.value && d.race == raceselector && d.female == femaleselector));
+
+					if (scaleselector==0) {
+						colorrange(data);
+					}
+
+					if (scaleselector==1) {
+						colorrange(data_new);
+					}
+
+					draw(data_new);
+					ageselector = this.value;
+
+					//set up nice text for the tooltip
+					if (ageselector==-1) { 
+						agename = "" 
+					}
+
+					if (ageselector==0) { 
+						agename = " under the age of 25 "
+					}
+
+					if (ageselector==1) { 
+						agename = " 25 years old and above "
+					}
+
+				});
+
+				//create event watcher and updater for sex selector
+				d3.selectAll(("input[name='sexselect']")).on("change", function() {
+
+					var data_new = data.filter(d => (d.age == ageselector && d.race == raceselector && d.female == this.value));
+
+					if (scaleselector==0) {
+						colorrange(data);
+					}
+
+					if (scaleselector==1) {
+						colorrange(data_new);
+					}
+
+					draw(data_new);
+					femaleselector = this.value;
+
+					//set up nice text for the tooltip
+					if (femaleselector==-1) { 
+						femalename = "" 
+					}
+
+					if (femaleselector==0) { 
+						femalename = " male "
+					}
+
+					if (femaleselector==1) { 
+						femalename = " female "
+					}
+
+				});
+
+				//create event watcher and updater for race selector
+				d3.selectAll(("input[name='raceselect']")).on("change", function() {
+
+					var data_new = data.filter(d => (d.age == ageselector && d.race == this.value && d.female == femaleselector));
+
+					if (scaleselector==0) {
+						colorrange(data);
+					}
+
+					if (scaleselector==1) {
+						colorrange(data_new);
+					}
+
+					draw(data_new);
+					raceselector = this.value;
+
+					//set up nice text for the tooltip
+					if (raceselector==-1) { 
+						racename = "" 
+					}
+
+					if (raceselector==0) { 
+						racename = " white "
+					}
+
+					if (raceselector==1) { 
+						racename = " black "
+					}
+
+					if (raceselector==2) { 
+						racename = " hispanic "
+					}
+
+					if (raceselector==3) { 
+						racename = " asian "
+					}
+
+					if (raceselector==4) { 
+						racename = " AIPI "
+					}
+
+				});
+
+				//create event watcher and updater for metric selector
+				d3.selectAll(("input[name='metricselect']")).on("change", function() {
+
+					metric = this.value;
+					var data_new = data.filter(d => (d.age == ageselector && d.race == raceselector && d.female == femaleselector));
+
+					if (scaleselector==0) {
+						colorrange(data);
+					}
+
+					if (scaleselector==1) {
+						colorrange(data_new);
+					}
+
+					draw(data_new);
+
+				});
+
+				//create event watcher and updater for scale selector
+				d3.selectAll(("input[name='scaleselect']")).on("change", function() {
+
+					scaleselector = this.value;
+					var data_new = data.filter(d => (d.age == ageselector && d.race == raceselector && d.female == femaleselector));
+
+					if (scaleselector==0) {
+						colorrange(data);
+					}
+
+					if (scaleselector==1) {
+						colorrange(data_new);
+					}
+
+					draw(data_new);
+
+				});
+
+				//Build min and max for color scale
+				var min
+				var max
+				var myColor
+				var xScale
+
+				function colorrange(data) {
+
+					//had to run a weird bugfix on the color interpolator by subtracting imperceptible values
+					max = d3.max(data, function(d) {
+						return (d[metric]-(0.001));
+					});
+					min = d3.min(data, function(d) {
+						return (d[metric]-(0.001));
+					});
+
+					myColor = d3.scaleSequential()
+						.domain([min,max])
+						.interpolator(d3.interpolateMagma)
+
+					//Set scale for x-axis
+					xScale = d3.scaleLinear()
+						.range([margin.left, width+margin.left])
+						.domain([ min, max] );
+
+				}
+
+				//start graph drawing function
+				function draw(data) {
+
+					//set up metric explanation text surrounding tooltip info
+					var descripa = ""
+					var descripb = ""
+
+					if (metric=="wage") {
+						descripa = " earn $"
+						descripb = " per year on average at two years after graduation. "
+					}
+
+					if (metric=="emp") {
+						descripa = " are employed for "
+						descripb = "% of quarters after graduation on average. "
+					}
+
+					if (metric=="length") {
+						descripa = " are employed by the same employer for "
+						descripb = " consecutive quarters on average. "
+					}
+
+					if (metric=="first") {
+						descripa = " take "
+						descripb = " quarters after graduation to find their first job. "
+					}
+
+					if (metric=="grad") {
+						descripa = " have a graduation rate of "
+						descripb = "%. "
+					}
+
+					//Build X scales and axis:
+					var x = d3.scaleBand()
+						.range([ 0, width ])
+						.domain(myGroups)
+						.padding(0.05);
+
+					svg.select("#xaxis")
+						.style("font-size", "10px")
+						.attr("transform", "translate(0," + height + ")")
+						.call(d3.axisBottom(x).tickSize(0))
+						.selectAll("text")	
+						.style("text-anchor", "end")
+						.style("fill", "#b2b2b2")
+						.attr("dx", "-.2em")
+						.attr("dy", ".6em")
+						.attr("transform", "rotate(-45)")
+						.style("font-family", "Tahoma")
+						.attr("id", "xaxis");
+
+					svg.select(".domain")
+						.remove();
+
+					//Build Y scales and axis:
+					var y = d3.scaleBand()
+						.range([ height, 0 ])
+						.domain(myVars)
+						.padding(0.05);
+
+					svg.select("#yaxis")
+						.style("font-size", "10px")
+						.style("font-family", "Tahoma")
+						.call(d3.axisLeft(y).tickSize(0))
+						.selectAll("text")
+						.style("fill", "#b2b2b2")
+
+					svg.select(".domain")
+						.remove()
+
+					//create a tooltip
+					var tooltip = d3.select("#tooltipper")
+						.attr("class", "tooltip")
+
+					//Three function that change the tooltip when user hover / move / leave a cell
+					var mouseover = function(d) {
+
+						tooltip
+							.transition()
+							.style("opacity", 1)
+							.duration(150)
+
+						d3.select(this)
+							.style("stroke", "white")
+							.style("opacity", .7)
+							.style("stroke-width", "5px")
+
+						d3.selectAll("#xaxis, text")
+							.filter(function(x) { return x == d.coll; })
+							.transition()
+							.duration(150)
+							.style("font-weight", "bold")
+							.style("fill", "black")
+
+						d3.selectAll("#yaxis, text")
+							.filter(function(x) { return x == d.prog; })
+							.transition()
+							.duration(150)
+							.style("font-weight", "bold")
+							.style("fill", "black")
+
+						//set the slider in the right place
+						scalelegend.select("#scaleslider")
+							.transition()
+							.style("opacity", 1)
+							.style("fill", "black")
+							.attr("x", function(x) {
+								return xScale(d[metric])
+							})
+							.attr("y", 0)
+							.attr("width", 2)
+							.attr("height", 20 + 0.5 * y.bandwidth())
+
+					}
+
+					var mousemove = function(d) {
+
+						tooltip
+							.html("Students at " + d.coll + " who study " + d.prog + descripa + numfix(d[metric]) + descripb + "<br>This estimate is based on " + d3.format(",")(d.obs) + racename + femalename + " graduates " + agename + "from our data.")
+
+						//Keep the slider visible
+						scalelegend.select("#scaleslider")
+							.style("opacity", 1)
+
+					}
+
+					var mouseleave = function(d) {
+
+						tooltip
+							.transition()
+							.style("opacity", 0)
+							.duration(150)
+
+						d3.select(this)
+							.style("stroke", "none")
+							.style("opacity", 1)
+
+						d3.selectAll("#xaxis, text")
+							.filter(function(x) { return x == d.coll; })
+							.transition()
+							.duration(150)
+							.style("font-weight", "normal")
+							.style("fill", "#b2b2b2")
+
+						d3.selectAll("#yaxis, text")
+							.filter(function(x) { return x == d.prog; })
+							.transition()
+							.duration(150)
+							.style("font-weight", "normal")
+							.style("fill", "#b2b2b2")
+
+						//make the slider invisible again
+						scalelegend.select("#scaleslider")
+							.style("opacity", 0)
+
+					}
+
+					//Get rid of older heatmap squares
+					svg.selectAll("#cellsold").data(data).remove();
+
+					//Transition present heatmap squares to old and invisible
+					svg.selectAll("#cellsnew").data(data).attr("id", "cellsold").transition().style("opacity",0).duration(1000);
+
+					//Draw new heatmap squares with new data, though start invisible
+					svg.selectAll()
+						.data(data, function(d) {return d.coll+':'+d.prog;})
+						.enter()
+						.append("rect")
+						.attr("x", function(d) { return x(d.coll) })
+						.attr("y", function(d) { return y(d.prog) })
+						.attr("rx", 2)
+						.attr("ry", 2)
+						.attr("width", x.bandwidth() )
+						.attr("height", y.bandwidth() )
+						.attr("id", "cellsnew")
+						.style("fill", function(d) { return myColor(d[metric])} )
+						.style("stroke-width", 4)
+						.style("stroke", "none")
+						.style("opacity", 0)
+						.on("mouseover", mouseover)
+						.on("mousemove", mousemove)
+						.on("mouseleave", mouseleave)
+
+					//fade them in for a nice effect
+					svg.selectAll("#cellsnew")
+						.data(data)
+						.transition()
+						.style("opacity",1)
+						.duration(500)
+
+					//set up horizontal scale
+					var countScale = d3.scaleLinear()
+						.domain([min, max])
+						.range([0, width])
+
+					//Calculate the stop points for the horizontal scale gradient
+					var numStops = 5;
+					countRange = countScale.domain();
+					countRange[2] = countRange[1] - countRange[0];
+					countPoint = [];
+
+					for(var i = 0; i < numStops; i++) {
+						countPoint.push(i * countRange[2]/(numStops-1) + countRange[0]);
+					}
+
+					//Create the gradient
+					scalelegend.append("defs")
+						.append("linearGradient")
+						.attr("id", "legend-traffic")
+						.attr("x1", "0%").attr("y1", "0%")
+						.attr("x2", "100%").attr("y2", "0%")
+						.selectAll("stop") 
+						.data(d3.range(numStops))                
+						.enter().append("stop") 
+						.attr("offset", function(d,i) { 
+							return countScale( countPoint[i] )/width;
+						})   
+						.attr("stop-color", function(d,i) { 
+							return myColor( countPoint[i] ); 
+						});
+
+					//Transition any existing scale to old and invisible
+					scalebar.selectAll("#legendRectnew").attr("id", "legendRectold").transition().style("opacity",0).duration(1000);
+
+					//Remove any old scale
+					scalebar.selectAll("#legendRectold").remove();
+
+					//Draw the new scale
+					scalebar.append("rect")
+						.attr("id", "legendRectnew")
+						.attr("x", margin.left)
+						.attr("y", 20)
+						.attr("rx", 4)
+						.attr("ry", 4)
+						.attr("width", width)
+						.attr("height", 0.5 * y.bandwidth())
+						.style("fill", "url(#legend-traffic)");
+
+					//Define x-axis
+					var xAxis = d3.axisBottom(xScale).tickSize(5)
+
+					//Remove any old scale axis
+					scalelegend.selectAll("#legendaxisold").remove();
+
+					//Transition the current scale axis to old and invisible
+					scalelegend.selectAll("#legendaxisnew").attr("id", "legendaxisold").transition().style("opacity",0).duration(500);
+
+					//Draw the new scale axis
+					scalelegend.append("g")
+						.attr("id", "legendaxisnew")
+						.attr("transform", "translate(0," + (20 + 0.5 * y.bandwidth()) + ")")
+						.style("opacity",0)
+						.call(xAxis);
+
+					scalelegend.select("#scalelower")
+						.attr("y", y.bandwidth()-8)
+						.style("opacity", 1)
+
+					scalelegend.select("#scalehigher")
+						.attr("y", y.bandwidth()-8)
+						.style("opacity", 1)
+						
+					scalelegend.selectAll("#legendaxisnew text")
+						.style("fill", "#666")
+						.style("font-family", "Tahoma")
+
+					scalelegend.selectAll("#legendaxisnew line")
+						.attr("stroke", "#666")
+
+					scalelegend.selectAll("#legendaxisnew path")
+						.attr("stroke", "#666")
+
+					scalelegend.selectAll("#legendaxisnew")
+						.transition()
+						.style("opacity", 1)
+						.duration(500)
+				}
+			})
+
+		</script>
+
+		<!-- Begin setting up the selector table -->
+		<div>
+
+			<table id="selectortable">
+
+				<tr>
+
+					<th>Outcome</th>
+					<th>Age Group</th>
+					<th>Sex Group</th>
+					<th>Racial/Ethnic Group</th>
+					<th>Color Scaling</th>
+
+				</tr>
+
+				<tr>
+
+					<td>
+						<!-- Create selectors for the metric -->
+						<input type="radio" name="metricselect" value="wage" checked="checked" id="wageradio">
+							<label for="wageradio"> Wage</label> <br> 
+						<input type="radio" name="metricselect" value="emp" id="empradio">
+							<label for="empradio"> Employment Rate</label> <br> 
+						<input type="radio" name="metricselect" value="length" id="lengthradio">
+							<label for="lengthradio"> Average Length of Job</label> <br> 
+						<input type="radio" name="metricselect" value="first" id="firstradio">
+							<label for="firstradio"> Time to First Job</label> <br> 
+						<input type="radio" name="metricselect" value="grad" id="gradradio">
+							<label for="gradradio"> Graduation Rate</label> <br> 
+					
+					</td>
+
+					<td>
+						<!-- Create selectors for the age -->
+						<input type="radio" name="ageselect" value="-1" checked="checked" id="ageradio"> 
+							<label for="ageradio"> Overall</label> <br>
+						<input type="radio" name="ageselect" value="0" id="underradio"> 
+							<label for="underradio"> Under 25</label> <br>
+						<input type="radio" name="ageselect" value="1" id="overradio"> 
+							<label for="overradio"> 25 and Older</label> <br>
+						
+					</td>
+					
+					<td>
+						<!-- Create selectors for the sex -->
+						<input type="radio" name="sexselect" value="-1" checked="checked" id="sexradio"> 
+							<label for="sexradio"> Overall</label> <br>
+						<input type="radio" name="sexselect" value="0" id="maleradio"> 
+							<label for="maleradio"> Male</label> <br>
+						<input type="radio" name="sexselect" value="1" id="femaleradio"> 
+							<label for="femaleradio"> Female</label> <br>
+						
+					</td>
+					
+					<td>
+						<!-- Create selectors for the race -->
+						<input type="radio" name="raceselect" value="-1" checked="checked" id="raceradio"> 
+							<label for="raceradio"> Overall</label> <br>
+						<input type="radio" name="raceselect" value="0" id="whiteradio"> 
+							<label for="whiteradio"> White</label> <br>
+						<input type="radio" name="raceselect" value="1" id="blackradio"> 
+							<label for="blackradio"> Black</label> <br>
+						<input type="radio" name="raceselect" value="2" id="hispradio"> 
+							<label for="hispradio"> Hispanic</label> <br>
+						<input type="radio" name="raceselect" value="3" id="asianradio"> 
+							<label for="asianradio"> Asian</label> <br>
+						<input type="radio" name="raceselect" value="4" id="aipiradio"> 
+							<label for="aipiradio"> American Indian<br> and Pacific Islander</label> <br>
+						
+					</td>
+					
+					<td>
+						<!-- Create selectors for the scaling -->
+						<input type="radio" name="scaleselect" value="0" checked="checked" id="scaleacrossradio"> 
+							<label for="scaleacrossradio"> Scale Color Across All Students</label> <br>
+						<input type="radio" name="scaleselect" value="1" id="scalewithinradio"> 
+							<label for="scalewithinradio"> Scale Color Within Selected Group</label> <br>
+						
+					</td>
+
+				</tr>
+
+			</table>
+
+			<br>
+
+			<br>
+
+			<br>
+
+		</div>
+
+		<div>
+			<p id="byline">Visualization by Brian Heseung Kim. <a href = "https://twitter.com/brhkim">Twitter</a>/<a href = "https://github.com/brhkim">GitHub</a>/<a href = "https://brhkim.com/">Web</a>: @brhkim <br>
+			This work is intended only as a proof-of-concept for interactive data visualizations. All opinions expressed are my own. Code heavily modified from work by Yan Holtz <a href="https://www.d3-graph-gallery.com/graph/heatmap_tooltip.html">here</a></p>
+		</div>
+
+	</body>
+
+</html>
