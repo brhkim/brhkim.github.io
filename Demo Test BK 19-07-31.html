@@ -388,7 +388,86 @@ chart.legend = new am4charts.Legend();
 chart.legend.position = "right";
 chart.legend.reverseOrder = true;
 chart.legend.itemContainers.template.togglable = false;
-	
+
+chart.legend.itemContainers.template.fontSize = "10px";
+chart.legend.markers.template.width= 15;
+chart.legend.markers.template.height= 15;
+chart.legend.itemContainers.template.height = 44;
+chart.legend.itemContainers.template.width = 180;
+
+
+// Create container to hold our hover labels
+let targetHeight = chart.pixelHeight - 120;
+let targetWidth = chart.pixelWidth - 520;
+var info = chart.plotContainer.createChild(am4core.Container);
+info.width = 220;
+info.height = 80;
+info.x = targetWidth;
+info.y = targetHeight;
+info.padding(10, 10, 10, 10);
+info.background.fill = am4core.color("#000");
+info.background.fillOpacity = 0;
+info.layout = "grid";
+
+
+// Create labels
+function createLabel(field, title, color) {
+  var titleLabel = info.createChild(am4core.Label);
+  titleLabel.text = "";
+  titleLabel.marginRight = 5;
+  titleLabel.minWidth = 100;
+  titleLabel.fill = color;
+
+  var valueLabel = info.createChild(am4core.Label);
+  valueLabel.id = title;
+  valueLabel.text = "";
+  valueLabel.minWidth = 50;
+  valueLabel.fontWeight = "bold";
+  valueLabel.fontSize = "30px";
+  valueLabel.fill = "#b4b4b4";
+}
+
+createLabel(series.dataFields.categoryX, series.name, series.stroke);
+
+
+// Updates values
+function updateValues(dataItem, key) {
+  chart.series.each(function(series) {
+    var label = chart.map.getKey(key);
+    label.text = chart.numberFormatter.format(dataItem["categoryX"]);
+  });
+}
+
+// Set up number format
+chart.numberFormatter.numberFormat = "####";
+
+// Show last item by default
+chart.events.on("ready", function(ev) {
+  chart.series.each(function(series) {
+    info.opacity = 0;
+  });
+});
+
+// Show overal close values when cursor is not shown
+chart.cursor.events.on("hidden", function(ev) {
+  chart.series.each(function(series) {
+    info.opacity = 0;
+  });
+});
+
+// Set up cursor's events to update the label
+chart.cursor.events.on("cursorpositionchanged", function(ev) {
+  chart.series.each(function(series) {
+    var dataItem = categoryAxis.getSeriesDataItem(
+      series,
+      categoryAxis.toAxisPosition(chart.cursor.xPosition),
+      true
+    );
+    updateValues(dataItem, series.name);
+    info.opacity = 1;
+  });
+});
+
 	
 }); // end am4core.ready()
 </script>
