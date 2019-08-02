@@ -1,5 +1,5 @@
 # brhkim.github.io
-Just testing the use of a github user page for displaying interactive graphs, primarily in D3.js
+Hello! My name is Brian Kim, and I'm currently a PhD student in Education Policy at the University of Virginia. This is a basic landing page just to host the various interactive visualizations that I've created; my primary website can be found [here](https://brhkim.com).
 
 [Revisualizing Community College Graduate Outcomes Using Heatmaps](https://brhkim.github.io/Outcomes%20Test%20BK%2019-08-01.html)
 
