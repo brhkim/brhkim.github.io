@@ -1,5 +1,5 @@
 # brhkim.github.io
-Hello! My name is Brian Kim, and I'm currently a PhD student in Education Policy at the University of Virginia. This is a basic landing page just to host the various interactive visualizations that I've created; my primary website can be found [here](https://brhkim.com).
+Hello! My name is Brian Heseung Kim, and I'm currently a PhD student in Education Policy at the University of Virginia. This is a basic GitHub landing page to host the various interactive visualizations that I've created; my primary website can be found [here](https://brhkim.com). Feel free to take a look around, send me feedback, build off my code, etc. Would love to collaborate or talk shop! Contact info can be found at my website.
 
 [Revisualizing Community College Graduate Outcomes Using Heatmaps](https://brhkim.github.io/Outcomes%20Test%20BK%2019-08-01.html)
 
