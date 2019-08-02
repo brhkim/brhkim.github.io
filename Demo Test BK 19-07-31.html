@@ -255,7 +255,7 @@ series.stacked = true;
 // static
 series.legendSettings.labelText = "White";
 series.legendSettings.valueText = "";
-series.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet = series.bullets.push(new am4charts.CircleBullet());
 bullet.circle.radius = 3;
@@ -275,7 +275,7 @@ series2.stacked = true;
 // static
 series2.legendSettings.labelText = "Black";
 series2.legendSettings.valueText = "";
-series2.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series2.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
 bullet2.circle.radius = 3;
@@ -293,7 +293,7 @@ series3.stacked = true;
 // static
 series3.legendSettings.labelText = "Hispanic";
 series3.legendSettings.valueText = "";
-series3.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series3.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
 bullet3.circle.radius = 3;
@@ -312,7 +312,7 @@ series4.stacked = true;
 // static
 series4.legendSettings.labelText = "Asian";
 series4.legendSettings.valueText = "";
-series4.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series4.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
 bullet4.circle.radius = 3;
@@ -335,7 +335,7 @@ bullet5.circle.strokeWidth = 2;
 // static
 series5.legendSettings.labelText = "American Indian";
 series5.legendSettings.valueText = "";
-series5.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series5.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 
 var series6 = chart.series.push(new am4charts.LineSeries());
@@ -350,7 +350,7 @@ series6.stacked = true;
 // static
 series6.legendSettings.labelText = "Native Hawaiian";
 series6.legendSettings.valueText = "";
-series6.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series6.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet6 = series6.bullets.push(new am4charts.CircleBullet());
 bullet6.circle.radius = 3;
@@ -369,7 +369,7 @@ series7.stacked = true;
 // static
 series7.legendSettings.labelText = "Two or More \nRaces";
 series7.legendSettings.valueText = "";
-series7.legendSettings.itemValueText = "{valueY.value} students\n{valueY.totalPercent.formatNumber('#.0')}%";
+series7.legendSettings.itemValueText = "{valueY.value.formatNumber('#,###')} students\n{valueY.totalPercent.formatNumber('#.0')}%";
 
 var bullet7 = series7.bullets.push(new am4charts.CircleBullet());
 bullet7.circle.radius = 3;
