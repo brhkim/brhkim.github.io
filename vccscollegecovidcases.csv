@@ -1,4 +1,4 @@
-college,curr_text,last2years,count,last3to5years,totalcases,priorcases,hospitalbeds,icubeds,populationaged60,date,serving,deglvl,group
+college,curr_text,last2years,count,last3to5years,totalcases,priorcases,hospitalbeds,icubeds,pop60,date,serving,deglvl,group
 Blue Ridge,Human Services,0,30,1,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Recent Graduate
 Blue Ridge,Human Services,1,19,0,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Recent Graduate
 Blue Ridge,Nursing,0,44,1,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Recent Graduate
@@ -521,237 +521,237 @@ Wytheville,Medical Transcription,0,5,1,15.5,7.5,232.5,18,29793,4/10/2020,Bland; 
 Wytheville,Medical Transcription,1,0,0,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Recent Graduate
 Wytheville,Radiography,0,0,1,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Recent Graduate
 Wytheville,Radiography,1,0,0,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Recent Graduate
-Blue Ridge,Nursing,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
 Blue Ridge,Veterinary Technology,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
-Blue Ridge,Human Services,,9,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
-Blue Ridge,Nursing,,0,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
-Blue Ridge,Health Sciences,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,CERT,Near Completer
 Blue Ridge,Nursing,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,CSC,Near Completer
+Blue Ridge,Nursing,,0,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
+Blue Ridge,Human Services,,9,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
 Blue Ridge,Health Information Technology,,0,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,CSC,Near Completer
+Blue Ridge,Health Sciences,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,CERT,Near Completer
+Blue Ridge,Nursing,,5,,109,56,453,46,57794,4/10/2020,Augusta; Harrisonburg; Highland; Rockingham; Staunton; Waynesboro,AAS,Near Completer
 Central Virginia,Respiratory Therapy,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,AAS,Near Completer
-Central Virginia,Health Information Technology,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
-Central Virginia,Nursing,,10,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
 Central Virginia,Radiography,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,AAS,Near Completer
-Central Virginia,Emergency Medical Services,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,AAS,Near Completer
-Central Virginia,Emergency Medical Services,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
+Central Virginia,Health Information Technology,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
 Central Virginia,Human Services,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CERT,Near Completer
-Dabney S. Lancaster,Nursing,,5,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,AAS,Near Completer
-Dabney S. Lancaster,Emergency Medical Services,,0,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,CSC,Near Completer
+Central Virginia,Nursing,,10,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
+Central Virginia,Emergency Medical Services,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,CSC,Near Completer
+Central Virginia,Emergency Medical Services,,0,,63,42,1174,55,62730,4/10/2020,Amherst; Appomattox; Bedford; Campbell; Lynchburg,AAS,Near Completer
 Dabney S. Lancaster,Practical Nursing,,0,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,CERT,Near Completer
+Dabney S. Lancaster,Nursing,,5,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,AAS,Near Completer
 Dabney S. Lancaster,Advanced Health Care,,0,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,CERT,Near Completer
-Danville,Health Sciences,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,AAS,Near Completer
+Dabney S. Lancaster,Emergency Medical Services,,0,,23.5,22,186,10,22456,4/10/2020,Alleghany; Bath; Botetourt; Buena Vista City; Covington; Lexington; Rockbridge,CSC,Near Completer
 Danville,First Year Studies,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CERT,Near Completer
-Danville,Health Sciences,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
-Danville,Practical Nursing,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
 Danville,Medical Laboratory Technology,,5,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
+Danville,Health Sciences,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,AAS,Near Completer
 Danville,Emergency Medical Services,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
+Danville,Practical Nursing,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
 Danville,Nursing,,13,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,AAS,Near Completer
+Danville,Health Sciences,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
 Danville,Emergency Medical Services,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
 Danville,Health Sciences,,0,,26.5,19,470.5,40,34114.5,4/10/2020,Danville; Halifax; Pittsylvania,CSC,Near Completer
-Eastern Shore,Health Information Technology,,0,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CSC,Near Completer
-Eastern Shore,Medical Assisting,,7,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CERT,Near Completer
-Eastern Shore,Practical Nursing,,0,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CERT,Near Completer
 Eastern Shore,Medical Office Clerk,,0,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CSC,Near Completer
-Germanna,Health Sciences,,10,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CSC,Near Completer
-Germanna,Dental Assisting,,5,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CERT,Near Completer
+Eastern Shore,Medical Assisting,,7,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CERT,Near Completer
+Eastern Shore,Health Information Technology,,0,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CSC,Near Completer
+Eastern Shore,Practical Nursing,,0,,16,13,22,10,13745,4/10/2020,Accomack; Northampton,CERT,Near Completer
 Germanna,Nursing,,0,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,AAS,Near Completer
+Germanna,Dental Assisting,,5,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CERT,Near Completer
 Germanna,Physical Therapist Assistant,,0,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,AAS,Near Completer
-Germanna,Nursing,,8,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,AAS,Near Completer
-Germanna,Practical Nursing,,5,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CERT,Near Completer
+Germanna,Health Sciences,,10,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CSC,Near Completer
 Germanna,Practical Nursing,,0,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CSC,Near Completer
-J. Sargeant Reynolds,Emergency Medical Services,,25,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+Germanna,Practical Nursing,,5,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,CERT,Near Completer
+Germanna,Nursing,,8,,159,115,697,48,79259,4/10/2020,Caroline; Culpeper; Fredericksburg; King George; Madison; Orange; Spotsylvania; Stafford,AAS,Near Completer
+J. Sargeant Reynolds,Health Sciences,,23,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 J. Sargeant Reynolds,Human Services,,41,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
-J. Sargeant Reynolds,Emergency Medical Services,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Medical Laboratory Technology,,8,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
-J. Sargeant Reynolds,Emergency Medical Services,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Respiratory Therapy,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Health Sciences,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Health Information Technology,,6,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
-J. Sargeant Reynolds,Nursing,,59,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
-J. Sargeant Reynolds,Respiratory Therapy,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
 J. Sargeant Reynolds,Human Services,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Nursing,,8,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Nursing,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
-J. Sargeant Reynolds,Opticianry,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
 J. Sargeant Reynolds,Opticianry,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
+J. Sargeant Reynolds,Nursing,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Nursing,,8,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
+J. Sargeant Reynolds,Respiratory Therapy,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Dental Assisting,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CERT,Near Completer
+J. Sargeant Reynolds,Sterile Processing Technology,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 J. Sargeant Reynolds,Health Information Technology,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 J. Sargeant Reynolds,Health Information Technology,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
+J. Sargeant Reynolds,Respiratory Therapy,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 J. Sargeant Reynolds,Health Sciences,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Sterile Processing Technology,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Dental Assisting,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CERT,Near Completer
-J. Sargeant Reynolds,Practical Nursing,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CERT,Near Completer
+J. Sargeant Reynolds,Health Sciences,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 J. Sargeant Reynolds,Practical Nursing,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-J. Sargeant Reynolds,Health Sciences,,23,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
+J. Sargeant Reynolds,Medical Laboratory Technology,,8,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Emergency Medical Services,,25,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Health Information Technology,,6,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
 J. Sargeant Reynolds,Emergency Medical Services,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
-John Tyler,Nursing,,16,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Human Services,,6,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Emergency Medical Services,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Health Sciences,,17,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Nursing,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,CSC,Near Completer
-John Tyler,Human Services,,15,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Nursing,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
-John Tyler,Human Services,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+J. Sargeant Reynolds,Nursing,,59,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Emergency Medical Services,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
+J. Sargeant Reynolds,Opticianry,,5,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,AAS,Near Completer
+J. Sargeant Reynolds,Practical Nursing,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CERT,Near Completer
+J. Sargeant Reynolds,Emergency Medical Services,,0,,552,429,2874.999877929688,236,146008,4/10/2020,Goochland; Hanover; Henrico; Louisa; Powhatan; Richmond City,CSC,Near Completer
 John Tyler,Massotherapy,,0,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,CSC,Near Completer
-Lord Fairfax,Nursing,,5,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,AAS,Near Completer
-Lord Fairfax,Practical Nursing,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
+John Tyler,Human Services,,6,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Human Services,,15,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Health Sciences,,17,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Nursing,,16,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Nursing,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,CSC,Near Completer
+John Tyler,Human Services,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Emergency Medical Services,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
+John Tyler,Nursing,,5,,266,192,540.9999923706055,151,105515,4/10/2020,Amelia; Charles City; Chesterfield; Colonial Heights; Dinwiddie; Hopewell; Petersburg; Prince George; Surry; Sussex,AAS,Near Completer
 Lord Fairfax,Health Information Technology,,5,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,AAS,Near Completer
-Lord Fairfax,Emergency Medical Services,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CSC,Near Completer
+Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
 Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
 Lord Fairfax,Medical Office Clerk,,5,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
-Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
-Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
+Lord Fairfax,Emergency Medical Services,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CSC,Near Completer
 Lord Fairfax,Medical Laboratory Technology,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,AAS,Near Completer
+Lord Fairfax,Nursing,,5,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,AAS,Near Completer
+Lord Fairfax,Practical Nursing,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
+Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
 Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
 Lord Fairfax,Health Sciences,,0,,135,99,860.9999713897705,64,71578,4/10/2020,Clarke; Fauquier; Frederick; Page; Rappahannock; Shenandoah; Warren; Winchester,CERT,Near Completer
 Mountain Empire,Medical Transcription,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
+Mountain Empire,Health Sciences,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
+Mountain Empire,Respiratory Therapy,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
+Mountain Empire,Nursing,,10,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
+Mountain Empire,Emergency Medical Services,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
+Mountain Empire,Health Information Technology,,6,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
+Mountain Empire,Health Sciences,,8,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
+Mountain Empire,Practical Nursing,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
+Mountain Empire,Medical Office Clerk,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CERT,Near Completer
 Mountain Empire,Medical Laboratory Technology,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
 Mountain Empire,Practical Nursing,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CERT,Near Completer
-Mountain Empire,Medical Office Clerk,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CERT,Near Completer
-Mountain Empire,Respiratory Therapy,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
-Mountain Empire,Health Information Technology,,6,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
-Mountain Empire,Nursing,,10,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
-Mountain Empire,Practical Nursing,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
-Mountain Empire,Health Sciences,,8,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
-Mountain Empire,Emergency Medical Services,,0,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,AAS,Near Completer
-Mountain Empire,Health Sciences,,5,,14,5,177.5,19,25470.5,4/10/2020,Dickenson; Lee; Norton; Scott; Wise,CSC,Near Completer
-New River,Human Services,,5,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,AAS,Near Completer
 New River,Health Information Technology,,0,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,CSC,Near Completer
+New River,Human Services,,5,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,AAS,Near Completer
+New River,Human Services,,5,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,AAS,Near Completer
 New River,Nursing,,10,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,AAS,Near Completer
 New River,Practical Nursing,,5,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,CERT,Near Completer
-New River,Human Services,,5,,25,21,252,30,37733,4/10/2020,Floyd; Giles; Montgomery; Pulaski; Radford,AAS,Near Completer
+Northern Virginia,Substance Abuse Rehabilitation,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CERT,Near Completer
 Northern Virginia,Medical Laboratory Technology,,5,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Occupational Therapist Assistant,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Veterinary Technology,,11,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Emergency Medical Services,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Health Information Technology,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Emergency Medical Services,,5,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Massotherapy,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Radiography,,6,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Northern Virginia,Health Information Technology,,7,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Northern Virginia,Dental Assisting,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CERT,Near Completer
-Northern Virginia,Physical Therapist Assistant,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Diagnostic Medical Sonogram,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Northern Virginia,Respiratory Therapy,,5,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Medical Laboratory Technology,,6,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Substance Abuse Rehabilitation,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CERT,Near Completer
-Northern Virginia,Health Sciences,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
-Northern Virginia,Emergency Medical Services,,15,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Diagnostic Medical Sonogram,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Emergency Medical Services,,5,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
 Northern Virginia,Dental Hygiene,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Radiography,,6,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Northern Virginia,Nursing,,15,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
-Northern Virginia,Emergency Medical Services,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Medical Laboratory Technology,,6,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Massotherapy,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Health Information Technology,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Health Sciences,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Veterinary Technology,,11,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Northern Virginia,Diagnostic Medical Sonogram,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Emergency Medical Services,,15,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Emergency Medical Services,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Occupational Therapist Assistant,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
+Northern Virginia,Emergency Medical Services,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,CSC,Near Completer
+Northern Virginia,Physical Therapist Assistant,,0,,1911,1364,2941,318,384086,4/10/2020,Alexandria; Arlington; Fairfax; Fairfax City; Falls Church; Loudoun; Manassas City; Manassas Park; Prince William,AAS,Near Completer
 Patrick Henry,Massotherapy,,0,,11.5,9.5,159,2,32819,4/10/2020,Franklin County; Henry; Martinsville; Patrick,CERT,Near Completer
-Patrick Henry,Nursing,,0,,11.5,9.5,159,2,32819,4/10/2020,Franklin County; Henry; Martinsville; Patrick,CSC,Near Completer
 Patrick Henry,Emergency Medical Services,,0,,11.5,9.5,159,2,32819,4/10/2020,Franklin County; Henry; Martinsville; Patrick,AAS,Near Completer
 Patrick Henry,Nursing,,5,,11.5,9.5,159,2,32819,4/10/2020,Franklin County; Henry; Martinsville; Patrick,AAS,Near Completer
-Paul D. Camp,Nursing,,5,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,AAS,Near Completer
+Patrick Henry,Nursing,,0,,11.5,9.5,159,2,32819,4/10/2020,Franklin County; Henry; Martinsville; Patrick,CSC,Near Completer
 Paul D. Camp,Emergency Medical Services,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
-Paul D. Camp,Emergency Medical Services,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
+Paul D. Camp,Medical Laboratory Technology,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
 Paul D. Camp,Practical Nursing,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CERT,Near Completer
+Paul D. Camp,Nursing,,5,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,AAS,Near Completer
 Paul D. Camp,Medical Office Clerk,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
 Paul D. Camp,Nursing,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
-Paul D. Camp,Medical Laboratory Technology,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
-Piedmont Virginia,Medical Office Clerk,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CSC,Near Completer
-Piedmont Virginia,Surgical Technology,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CERT,Near Completer
-Piedmont Virginia,Emergency Medical Services,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CSC,Near Completer
-Piedmont Virginia,Diagnostic Medical Sonogram,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,AAS,Near Completer
-Piedmont Virginia,Nursing,,5,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,AAS,Near Completer
-Piedmont Virginia,Health Information Coding Specialist,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CERT,Near Completer
+Paul D. Camp,Emergency Medical Services,,0,,52.5,47,159.5,14,24848.5,4/10/2020,Franklin City; Isle of Wight; Southampton; Suffolk,CSC,Near Completer
 Piedmont Virginia,Emergency Medical Services,,5,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,AAS,Near Completer
+Piedmont Virginia,Diagnostic Medical Sonogram,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,AAS,Near Completer
+Piedmont Virginia,Medical Office Clerk,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CSC,Near Completer
+Piedmont Virginia,Nursing,,5,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,AAS,Near Completer
+Piedmont Virginia,Surgical Technology,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CERT,Near Completer
 Piedmont Virginia,Practical Nursing,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CERT,Near Completer
-Rappahannock,Emergency Medical Services,,0,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CSC,Near Completer
+Piedmont Virginia,Emergency Medical Services,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CSC,Near Completer
+Piedmont Virginia,Health Information Coding Specialist,,0,,109,86,756,37,53760,4/10/2020,Albemarle; Buckingham; Charlottesville; Fluvanna; Greene; Louisa; Nelson,CERT,Near Completer
 Rappahannock,Medical Laboratory Technology,,0,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CSC,Near Completer
 Rappahannock,Emergency Medical Services,,0,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CSC,Near Completer
-Rappahannock,Nursing,,13,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,AAS,Near Completer
-Rappahannock,Practical Nursing,,7,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CERT,Near Completer
 Rappahannock,Nursing,,9,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CSC,Near Completer
-Southside Virginia,Practical Nursing,,11,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CERT,Near Completer
-Southside Virginia,Health Sciences,,0,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CSC,Near Completer
+Rappahannock,Practical Nursing,,7,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CERT,Near Completer
+Rappahannock,Nursing,,13,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,AAS,Near Completer
+Rappahannock,Emergency Medical Services,,0,,64,46,80.99999904632568,14,51015,4/10/2020,Essex; Gloucester; King George; King William; King and Queen; Lancaster; Mathews; Middlesex; New Kent; Northumberland; Richmond County; Westmoreland,CSC,Near Completer
 Southside Virginia,Human Services,,12,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,AAS,Near Completer
-Southside Virginia,Human Services,,0,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CERT,Near Completer
 Southside Virginia,Nursing,,37,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,AAS,Near Completer
 Southside Virginia,Emergency Medical Services,,0,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,AAS,Near Completer
-Southwest Virginia,Nursing,,11,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
-Southwest Virginia,Health Sciences,,22,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
-Southwest Virginia,Radiography,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
-Southwest Virginia,Human Services,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
-Southwest Virginia,Health Information Technology,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
-Southwest Virginia,Practical Nursing,,11,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
+Southside Virginia,Practical Nursing,,11,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CERT,Near Completer
+Southside Virginia,Health Sciences,,0,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CSC,Near Completer
+Southside Virginia,Human Services,,0,,89.5,39,592.5,31,43967.5,4/10/2020,Brunswick; Buckingham; Charlotte; Cumberland; Emporia; Greensville; Halifax; Lunenburg; Mecklenburg; Nottoway; Prince Edward,CERT,Near Completer
 Southwest Virginia,Occupational Therapist Assistant,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
-Southwest Virginia,Health Sciences,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
-Southwest Virginia,Emergency Medical Services,,7,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
-Southwest Virginia,Health Sciences,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
-Southwest Virginia,Emergency Medical Services,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
 Southwest Virginia,Human Services,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
-Southwest Virginia,Medical Laboratory Technology,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Nursing,,11,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
 Southwest Virginia,Substance Abuse Rehabilitation,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
-Southwest Virginia,Opticianry,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
 Southwest Virginia,Human Services,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
+Southwest Virginia,Health Sciences,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Health Information Technology,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Health Sciences,,22,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
+Southwest Virginia,Opticianry,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Practical Nursing,,11,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
+Southwest Virginia,Emergency Medical Services,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Emergency Medical Services,,7,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
+Southwest Virginia,Medical Laboratory Technology,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Human Services,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CERT,Near Completer
+Southwest Virginia,Health Sciences,,5,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,CSC,Near Completer
+Southwest Virginia,Radiography,,0,,6,6,231.4999961853027,29,27404.5,4/10/2020,Buchanan; Dickenson; Russell; Tazewell,AAS,Near Completer
 Thomas Nelson,Medical Office Clerk,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Thomas Nelson,Dental Hygiene,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
-Thomas Nelson,Health Sciences,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
-Thomas Nelson,Nursing,,6,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
 Thomas Nelson,Dental Hygiene,,5,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Thomas Nelson,Emergency Medical Services,,5,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Thomas Nelson,Human Services,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
+Thomas Nelson,Health Sciences,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
+Thomas Nelson,Dental Hygiene,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
+Thomas Nelson,Nursing,,6,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
 Thomas Nelson,Emergency Medical Services,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Thomas Nelson,Nursing,,16,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Thomas Nelson,Emergency Medical Services,,23,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
+Thomas Nelson,Emergency Medical Services,,5,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
 Thomas Nelson,Human Services,,25,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
 Thomas Nelson,Human Services,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
-Tidewater,Human Services,,55,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Emergency Medical Services,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
-Tidewater,Respiratory Therapy,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Occupational Therapist Assistant,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Veterinary Technology,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Physical Therapist Assistant,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Health Sciences,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
-Tidewater,Practical Nursing,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
-Tidewater,Medical Office Clerk,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Thomas Nelson,Nursing,,16,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
+Thomas Nelson,Human Services,,0,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,CSC,Near Completer
+Thomas Nelson,Emergency Medical Services,,23,,303,262,875,138,100848,4/10/2020,Hampton; James City; Newport News; Poquoson; Williamsburg; York,AAS,Near Completer
+Tidewater,Health Information Technology,,5,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
 Tidewater,Emergency Medical Services,,27,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
 Tidewater,Nursing,,21,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
+Tidewater,Respiratory Therapy,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
+Tidewater,Medical Office Clerk,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Tidewater,Veterinary Technology,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
+Tidewater,Medical Laboratory Technology,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Tidewater,Physical Therapist Assistant,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
 Tidewater,Veterinary Technology,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Tidewater,Practical Nursing,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Tidewater,Occupational Therapist Assistant,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
 Tidewater,Emergency Medical Services,,5,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
 Tidewater,Emergency Medical Services,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Tidewater,Emergency Medical Services,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
 Tidewater,Radiography,,5,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Health Information Technology,,5,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
-Tidewater,Medical Laboratory Technology,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
-Virginia Highlands,Emergency Medical Services,,5,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
-Virginia Highlands,Health Sciences,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
+Tidewater,Human Services,,55,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,AAS,Near Completer
+Tidewater,Health Sciences,,0,,486.5,403,2231.5,219,187930.5,4/10/2020,Chesapeake; Norfolk; Portsmouth; Suffolk; Virginia Beach,CSC,Near Completer
+Virginia Highlands,Practical Nursing,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CSC,Near Completer
+Virginia Highlands,Dental Assisting,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CSC,Near Completer
+Virginia Highlands,Radiography,,5,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
+Virginia Highlands,Human Services,,8,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
 Virginia Highlands,Human Services,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
 Virginia Highlands,Health Sciences,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
-Virginia Highlands,Human Services,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
 Virginia Highlands,Nursing,,10,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
-Virginia Highlands,Health Sciences,,8,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
-Virginia Highlands,Human Services,,8,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
 Virginia Highlands,Health Sciences,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
-Virginia Highlands,Dental Assisting,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CSC,Near Completer
-Virginia Highlands,Practical Nursing,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CSC,Near Completer
-Virginia Highlands,Radiography,,5,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
-Virginia Highlands,Health Information Technology,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
 Virginia Highlands,Practical Nursing,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
-Virginia Western,Radiography,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
-Virginia Western,Nursing,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Highlands,Health Sciences,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
+Virginia Highlands,Human Services,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
+Virginia Highlands,Health Sciences,,8,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
+Virginia Highlands,Health Information Technology,,0,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,CERT,Near Completer
+Virginia Highlands,Emergency Medical Services,,5,,22.5,12.5,192.5000076293945,16,24262,4/10/2020,Bristol; Smyth; Washington,AAS,Near Completer
+Virginia Western,Medical Laboratory Technology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Western,Radiation Oncology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
+Virginia Western,Dental Hygiene,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
 Virginia Western,Practical Nursing,,7,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CERT,Near Completer
-Virginia Western,Radiation Oncology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Western,Nursing,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Western,Medical Office Clerk,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Western,Radiography,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
 Virginia Western,Human Services,,22,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
 Virginia Western,Dental Hygiene,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
-Virginia Western,Radiation Oncology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
-Virginia Western,Medical Office Clerk,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
-Virginia Western,Medical Laboratory Technology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
+Virginia Western,Radiation Oncology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
 Virginia Western,Health Information Technology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
 Virginia Western,Health Information Technology,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
-Virginia Western,Dental Hygiene,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
-Virginia Western,Radiography,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,CSC,Near Completer
 Virginia Western,Nursing,,9,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
-Wytheville,Health Sciences,,11,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
+Virginia Western,Radiography,,0,,49,37.5,1173,109,68240,4/10/2020,Botetourt; Craig; Franklin County; Roanoke City; Roanoke County; Salem,AAS,Near Completer
+Wytheville,Practical Nursing,,5,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CERT,Near Completer
 Wytheville,Physical Therapist Assistant,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
 Wytheville,Health Information Technology,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
-Wytheville,Practical Nursing,,5,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CERT,Near Completer
 Wytheville,Human Services,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
 Wytheville,Dental Assisting,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
-Wytheville,Medical Laboratory Technology,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
+Wytheville,Nursing,,10,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
 Wytheville,Medical Office Clerk,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CERT,Near Completer
+Wytheville,Health Sciences,,11,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
 Wytheville,Dental Hygiene,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
 Wytheville,Medical Laboratory Technology,,5,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,CSC,Near Completer
-Wytheville,Nursing,,10,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
+Wytheville,Medical Laboratory Technology,,0,,15.5,7.5,232.5,18,29793,4/10/2020,Bland; Carroll; Galax; Grayson; Smyth; Wythe,AAS,Near Completer
