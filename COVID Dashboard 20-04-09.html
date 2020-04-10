@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<!-- Version: 20-04-09 -->
+
+<!-- Load d3.js, array functions, and color palettes -->
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+<!--
+<script src="//d3js.org/d3.v5.min.js"></script>
+<script src="//d3js.org/d3-array.v2.min.js"></script>
+<script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
+-->
+
+<html lang="en">
+
+	<head>
+
+		<title>COVID-19 Health Workforce Recruiting Dashboard</title>
+
+		<style>
+			body {
+				font-size: 0.8em;
+				font-family:Tahoma;
+				color: #666;
+				margin:auto;
+				text-size-adjust: none;
+				-webkit-text-size-adjust: none;
+				-moz-text-size-adjust: none;
+				-ms-text-size-adjust: none;
+			}
+
+			.boldtext {
+				font-weight: bold;
+				color: #262626;
+			}
+
+			/* CSS stylings generally in order of vertical appearance in the main panel */
+			.mainpanel {
+				max-width:80vw;
+			}
+
+			#titlearea {
+				margin-left:5vw;
+				margin-right:5vw;
+				/* Match margin-bottom to margin.top for svg container*/
+			}
+
+			#titlecopy {
+				font-weight:bold;
+				color:#000000;
+				font-size:2.2em;
+				text-align:center;
+			}
+
+			.shortlink {
+				font-size: 0.8em;
+				text-align: center;
+				margin-top:-2em;
+			}
+
+			.subtitletext {
+				padding-top:2vh;
+				text-align: left;
+			}
+
+			.dividerline {
+				margin-left:9vw;
+				margin-right:9vw;
+				margin-bottom:2em;
+				margin-top:2em;
+				border-bottom: 1px solid #666;
+			}
+
+			.dividerlinetooltip {
+				margin-left:0vw;
+				margin-right:3vw;
+				margin-bottom:0.8em;
+				margin-top:0.8em;
+				border-bottom: 1px solid #666;
+			}
+
+			.instructionsarea {
+				margin-bottom:3em;
+			}
+
+			.buttoncenter {
+				text-align: center;
+				margin-top:7vh;
+			}
+
+			.button1 {
+				width:30%;
+				margin:auto;
+				background-color: #1c2e78; 
+				cursor: pointer;
+				border: none;
+				color: white;
+				padding: 0.5em 1em;
+				display: inline-block;
+				font-size:1em;
+			}
+
+			.button2 {
+				width:70%;
+				margin:auto;
+				background-color: #1c2e78; 
+				cursor: pointer;
+				border: none;
+				color: white;
+				padding: 0.5em 1em;
+				display: inline-block;
+				font-size:1em;
+				margin-bottom:2em;
+				margin-left: -1vw;
+			}
+
+			.errormessage {
+				text-align:center;
+				margin-top: 15vh;
+				margin-bottom:50vh;
+				opacity:0;
+			}
+
+			.mouseovertextalign {
+				text-align: left;
+				padding-left: 1vw;
+				padding-right: 1vw;
+				padding-top: 0.5vh;
+				padding-bottom: 0.1vh;
+			}
+
+			.mouseovertextalign p {
+				margin-block-start: 0.5em;
+				margin-block-end: 0.5em;
+			}
+
+			.tooltipbackground {
+				background-color: #fff;
+				border: solid;
+				border-width: 1px;
+				border-radius: 4px;
+				border-color: #aaa;
+				padding: 0.7em;
+			}
+
+			.tooltipverticalcenter1 {
+				margin:0;
+				position: relative;
+				top: 15%;
+			}
+
+			.tooltipverticalcenter2 {
+				margin:0;
+				position: relative;
+				top: 28%;
+				left: 25%;
+			}
+
+			#newmaps:hover {
+				cursor: pointer;
+			}
+
+			#newslices:hover {
+				cursor: zoom-in;
+			}
+
+			#breakdowntooltip {
+				text-align: center;
+				margin-left: 15vw;
+				margin-right: 15vw;
+				margin-top: 2vh;
+				margin-bottom: 1vh;
+			}
+
+			#donuttable {
+				margin-top: 3vh;
+				margin-left: 4vw;
+				margin-right: 4vw;
+			}
+
+			.donutlabeltext {
+				margin:0;
+				font-size:1em;
+				line-height:100%;
+			}
+
+			.byline {
+				margin-left:5vw;
+				margin-right:5vw;
+				text-align: center;
+				font-size: 0.9em;
+				padding: 1em;
+			}
+
+			/* Side panel CSS stylings, generally in order of appearance */
+			.sidepanel {
+				width: 15vw; 
+				position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+				z-index: 1; /* Stay on top */
+				top: 0; /* Stay at the top */
+				bottom: 0;
+				right: 0;
+				background-color: #fff; 
+				overflow-y: scroll; /* allow vertical scroll */
+				overflow-x: hidden; /* Disable horizontal scroll */
+				padding-top: 8vh;
+				padding-bottom:8vh;
+				padding-left: 2vw;
+				padding-right:1vw;
+				border-left: 1px;
+				border-left-style: solid;
+				border-left-color: #b2b2b2;
+			}
+
+			#selectortable {
+				table-layout:fixed;
+				border-collapse:collapse;
+				text-align:left;
+				vertical-align:top;
+				width:85%;
+				margin-left:1.5vw;
+			}
+
+			/* Note some very weird values to get the alignments right */
+			#selectortable th {
+				padding-top:2em;
+				padding-left: -1.5vw;
+				margin-left:-3px;
+				text-indent: -2vw;
+			}
+
+			#selectortable td {
+				vertical-align:top;
+				line-height:1.2em;
+				padding-top: 1em;
+			}
+
+			.sidepanelitem {
+				margin-bottom:0.5em;
+			}
+
+			input[type="radio"] {
+				margin-top: -2px;
+				margin-bottom: -2px;
+				vertical-align: middle;
+				margin-left:-2vw;
+				cursor: pointer;
+			}
+
+			input[type="checkbox"] {
+				vertical-align: middle;
+				margin-top: -1px;
+				margin-left: -2vw;
+				margin-bottom: -2px;
+				cursor: pointer;
+			}
+
+			.tableindent {
+				margin-left: -1.5vw;
+				margin-top: .5vh;
+				margin-bottom: .8vh;
+				padding-left: 3vw;
+				border-left: 1px;
+				border-left-style: solid;
+				border-left-color: #b2b2b2;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<!-- Begin setting up the main panel for all the visualizations -->	
+		<div class="mainpanel">
+
+			<div id="titlearea">
+
+				<p id="titlecopy">COVID-19 Health Workforce Recruiting Dashboard</p>
+				<div class="shortlink">(Shortlink: <a href="https://www.nudge4.org/covid19">www.nudge4.org/covid19</a>)</div>
+
+				<p class="subtitletext">In partnership with the Virginia Community College System (VCCS), the Nudge4 Solutions Lab at the University of Virginia identified recent graduates of health care programs <span class="boldtext">who are not currently working in health care</span> and recently stopped-out health care students near completion who could <span class="boldtext">help fill critical workforce needs</span> in the face of the COVID-19 crisis. Additional details on the data and analysis we used to create this dashboard, as well as important caveats regarding its use, are available <a href="https://nudge4.org/covid19methodology" target="_blank"> here</a>.</span></p>
+
+				<!-- State and local leaders interesting in using this tool to recruit health care workers should contact the Virginia Community College System at <a href="mailto:info@vccs.edu">info@vccs.edu</a> for more information. -->
+
+				<div class="dividerline preagreehide"></div>
+
+				<div class="preagreehide instructionsarea">
+					<p><span class="boldtext">How to use this dashboard:</span></p>
+				
+					<ol>
+						<li>To begin, <span class="boldtext">select your students of interest on the right-side panel.</span></li>
+						<li>The main panel map will update to show you how many relevant students attended/graduated from each VCCS college, and the bottom panel donut charts will display breakdowns across different groups of students. We also include information on current COVID cases (updated daily) for your reference.</li>
+						<li><span class="boldtext">Hover over a college region on the map</span> to see more information about that region in the tooltip box.</li>
+						<li><span class="boldtext">Click on a region</span> to see a more detailed breakdown of students from that college in the bottom panel.</li>
+						<li>Finally, <span class="boldtext">hover over sections of the breakdown charts</span> below the map to see more plain-speak explanations of that statistic.</li>
+					</ol>
+				</div>
+
+			</div>
+
+
+			<!-- Create a div where the graph will take place -->
+			<div class="preagreehide errormessage">
+				<button type="button" class="buttoncenter button1" onclick="buttonreset(); eventwatchers();">The selection you created has zero matching students. Adjust your options or click here to reset.</button>
+			</div>
+
+			<div class="preagreehide errorhide" id="mapchartarea"></div>
+
+			<div class="preagreehide errorhide" id="scalelegend"></div>
+
+			<!-- Create a div where the donuts will take place -->
+			<div class="preagreehide errorhide" id="breakdownarea">
+				<div id="breakdowntooltiparea">
+					<div id="breakdowntooltip" class="tooltipbackground"><span class="preagreehide breakdowntooltiptext tooltipverticalcenter1">Hover over the breakdown charts below to see more information about your selected students <span class='boldtext'>across Virginia</span>, or click a region on the map to get breakdowns specific to that college area</span></div>
+				</div>
+				<table class="preagreehide" id="donuttable">
+					<tr>
+						<th class="boldtext">Group Breakdown</th>
+						<th class="boldtext">Program Breakdown</th>
+					</tr>
+					<tr>
+						<td>
+							<div id="groupdonut"></div>
+						</td>
+
+						<td>
+							<div id="programdonut"></div>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2" class="boldtext">Degree Breakdown</th>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div id="degreedonut"></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="dividerline preagreehide"></div>
+
+			<!-- begin byline -->
+			<div>
+				<p class="byline"><a href="https://nudge4.org" target="_blank"><img src="https://nudge4.org/wp-content/uploads/2016/08/Nudge4_headerlogo-01.png" alt="Nudge4 Logo" height="50" width="152" style="padding-bottom:13px;"></a><a href="https://vccs.edu" target="_blank"><img src="https://32odk5emep614s91y32i7ht1125-wpengine.netdna-ssl.com/wp-content/themes/vccs/images/vccs-logo.png" alt="VCCS Logo" height="70" width="137"></a><br>
+					Analysis and Visualization by the <a href="https://nudge4.org" target="_blank">Nudge4 Solutions Lab</a>, in partnership with the <a href="https://vccs.edu" target="_blank">Virginia Community College System</a>. <br>
+					For more information on this analysis, please contact <a href="mailto:info@nudge4.org">info@nudge4.org</a><br>
+				Dashboard Designer/Developer: Brian Heseung Kim (@brhkim on <a href = "https://brhkim.com/" target="_blank">Web</a>/<a href = "https://twitter.com/brhkim" target="_blank">Twitter</a>/<a href = "https://github.com/brhkim" target="_blank">GitHub</a>)</p>
+				
+			</div>
+
+		<!-- end main panel -->	
+		</div>
+
+
+
+		<!-- Begin setting up the sidebar selector table -->
+		<div class="sidepanel">
+
+			<table class="preagreehide" id="selectortable">
+
+				<tr>
+					<div class="preagreehide" style="margin-left:2vw; margin-bottom:-2vh;">
+						<button type="button" class="buttoncenter button2" onclick="buttonreset(); eventwatchers();">Reset</button>
+					</div>
+				</tr>
+
+				<tr><th class="boldtext">Groups Included</th></tr>
+
+				<tr>
+
+					<td>
+						<!-- Create selectors for the group -->
+						<div class="sidepanelitem">
+							<input type="checkbox" name="recentselect" class="default" value="1" checked="checked" id="recentcheck"> 
+								<label for="recentcheck"> Recent Graduates</label>
+						</div>
+
+						<div class="tableindent" id="recentoptions">
+
+							<div class="sidepanelitem">
+								<input type="radio" name="cohortselect" class="default" value="0" checked="checked" id="twoyearcohort"> 
+									<label for="twoyearcohort"> Past Two Years</label>
+							</div>
+
+							<div class="sidepanelitem">
+								<input type="radio" name="cohortselect" value="1" id="fiveyearcohort"> 
+									<label for="fiveyearcohort"> Past Five Years</label>
+							</div>
+						</div>
+
+						<div class="sidepanelitem">
+							<input type="checkbox" name="nearselect" class="default" value="1" checked="checked" id="nearcheck"> 
+								<label for="nearcheck"> Students Close to Degree</label>
+						</div>
+
+					</td>
+					
+				</tr>
+
+				<tr><th class="boldtext">Degree Levels Included</th></tr>
+
+				<tr>
+
+					<td>
+						<!-- Create selectors for the degree -->
+						<div class="sidepanelitem">
+							<input type="checkbox" name="aasselect" class="default" value="1" checked="checked" id="associatescheck"> 
+								<label for="associatescheck"> Associate</label>
+						</div>
+						
+						<div class="sidepanelitem">
+							<input type="checkbox" name="certselect" class="default" value="1" checked="checked" id="certcheck"> 
+								<label for="certcheck"> Certificate</label>
+						</div>
+
+						<div class="sidepanelitem">
+							<input type="checkbox" name="cscselect" class="default" value="1" checked="checked" id="csccheck"> 
+								<label for="csccheck"> Career Studies Certificate</label>
+						</div>
+
+						<!--
+						<div class="sidepanelitem">
+							<input type="checkbox" name="cscselect" class="default" value="1" checked="checked" id="csccheck"> 
+								<label for="csccheck"> Fast Forward Degree</label>
+						</div>
+						-->
+
+					</td>
+					
+				</tr>
+
+				<tr><th class="boldtext">Programs Included</th></tr>
+
+				<tr>
+
+					<td>
+						<!-- Create selectors for the program -->
+						<div class="sidepanelitem">
+							<input type="radio" name="programselect" class="default" value="0" checked="checked" id="programall"> 
+								<label for="programall"> All Programs</label>
+						</div>
+
+						<div class="sidepanelitem">
+							<input type="radio" name="programselect" value="1" id="programspecific"> 
+								<label for="programspecific"> Select Specific Programs</label>
+						</div>
+
+						<!-- Note that these are dynamically generated from the data using the listprograms() function down below -->
+						<div class="tableindent programselectfill" id="programoptions" style="display:none;"></div>
+
+					</td>
+					
+				</tr>
+
+			</table>
+
+		</div>
+
+		<script type="text/javascript">
+			
+			var breakdowntooltipnoselection = "Hover over the breakdown charts below to see more information about your selected students <span class='boldtext'>across Virginia</span>, or click a region on the map to get breakdowns specific to that college area"
+			var breakdowntooltipvalidselection = ""
+			var breakdowntooltipemptyselection = "Your currently selected area has zero students. Click the region again to deselect it, or change your student filters on the right side panel"
+
+			//Set consistent rounding functions for numbers
+			var roundtwo = d3.format(",.2f")
+			var roundwhole = d3.format(",.0f")
+
+			//Set empty variables for the dimensions and margins of the graph
+			var margin;
+			var width;
+			var height;
+			var extent;
+			var mapsvg = d3.select("#mapchartarea")
+					.append("svg")
+					.attr("width", 0)
+					.attr("height", 0)
+					.attr("id", "mapsvg")
+					.attr("class", "preagreehide");
+
+			//Fill in dimensions for the first time
+			// Get window sizes and set graph sizes to empty first
+			// first use script to get window size for proper graph and chart sizing
+			var vw = 0;
+			var vh = 0;
+			var em = 0;
+			setmapsize();
+
+			//Generate empty "g" for the tooltip text to appear on top
+			mapsvg.append("g")
+				.attr("id", "maptooltipgroup")
+
+			var maptooltiptext = d3.selectAll("#maptooltipgroup")
+				.append("foreignObject")
+				.attr("id", "maptooltipobject")
+				.attr("width", width/3)
+				.attr("height", height/1)
+				.append("xhtml:div")
+				.attr("class", "mouseovertextalign tooltipbackground maptext")
+				.style("opacity", "0")
+
+			//Empty values for map color scale and xscale later
+			var min
+			var max
+			var myColor
+
+			//Empty values for bubble radius scale later
+			var bubblemax
+			var bubblemin
+			var maxbubbleradius
+			var radius
+			
+			//Make container for heatmap scale legend
+			var xScale
+
+			var scalelegend = d3.select("#scalelegend")
+					.append("svg")
+					.attr("width", width)
+					.attr("height", 60)
+					.attr("id", "scalesvg")
+					.append("g")
+
+			//Add in text for the scale legend; "Fewer Students" and "Higher Students"
+			scalelegend.append("text")
+				.attr("class", "scalelower")
+				.attr("id", "scalelower1")
+				.attr("text-anchor", "end")
+				.style("fill", "#666")
+				.style("opacity", "0")
+				.text("Fewer")
+
+			scalelegend.append("text")
+				.attr("class", "scalelower")
+				.attr("id", "scalelower2")
+				.attr("text-anchor", "end")
+				.style("fill", "#666")
+				.style("opacity", "0")
+				.text("Students")
+
+			scalelegend.append("text")
+				.attr("class", "scalehigher")
+				.attr("id", "scalehigher1")
+				.attr("text-anchor", "start")
+				.style("fill", "#666")
+				.style("opacity", "0")
+				.text("More")
+
+			scalelegend.append("text")
+				.attr("class", "scalehigher")
+				.attr("id", "scalehigher2")
+				.attr("text-anchor", "start")
+				.style("fill", "#666")
+				.style("opacity", "0")
+				.text("Students")
+
+			//Set up empty donut graph svgs
+			var donut1 = d3.select("#groupdonut")
+				.append("svg")
+
+			var donut2 = d3.select("#programdonut")
+				.append("svg")
+
+			var donut3 = d3.select("#degreedonut")
+				.append("svg")
+
+			//Set empty vars for filtered datasets up front so we can access them outside of the functions
+				//Primary datasets
+			var cleandata = {}
+			var defaultdata = {}
+			var filtereddata = {}
+
+				//Area-level filtered datasets
+			var casecounts = {}
+			var studentcounts = {}
+			var serviceareas = {}
+			var coviddate = {}
+			var covidperstudent = {}
+
+				//State-level filtered datasets
+			var statecasecounts = {}
+			var statestudentcounts = {}
+			var statecovidperstudent = {}
+			var programlist = {}
+
+				//Variable indicating which, if any, area is selected on the map
+			var selectedarea = ""
+
+				//Variable indicating how many times the graph has been drawn to simplify getting a defaultdata dataset
+			var drawcount = 0;
+
+			//Download the data first before you do anything else
+			var promises = [
+				d3.json("https://raw.githubusercontent.com/brhkim/brhkim.github.io/master/VCCSSimplified.json"),
+				d3.csv("https://raw.githubusercontent.com/brhkim/brhkim.github.io/master/vccscollegecovidcases.csv")
+			]
+
+			//Require that data is downloaded before running drawing functions
+			Promise.all(promises).then(drawmap)
+
+			//Set up the resizing, run only after resizing has finished
+			var wait
+			window.addEventListener("resize", function() {
+					clearTimeout(wait);
+					wait = setTimeout(eventwatchers, 800);
+			})
+
+			//Begin main map drawing function
+			function drawmap(data) {
+				//Save original data
+				cleandata = [data[0], data[1]]
+
+				//Increment the drawcount variable
+				drawcount = drawcount + 1
+
+				//First reformat some of the values into numeric
+				data[1].forEach(function(d) {
+						d.totalcases = +d.totalcases;
+	 					d.count = +d.count;
+					});
+
+				//Automatically fill in the "Select Specific Programs" list on the side panel only if this is the initial rendering of everything
+				if (drawcount==1) {
+					listprograms(cleandata)
+				}
+
+				//Grab filter options
+				var recentgradsfilter = d3.selectAll(("input[name='recentselect']")).property("checked")
+				var pastfivefilter = d3.selectAll(("input[name='cohortselect']:checked")).property("value")
+					//0 if 2, 1 if 5
+				var nearcompletersfilter = d3.selectAll(("input[name='nearselect']")).property("checked")
+				var aasfilter = d3.selectAll(("input[name='aasselect']")).property("checked")
+				var certfilter = d3.selectAll(("input[name='certselect']")).property("checked")
+				var cscfilter = d3.selectAll(("input[name='cscselect']")).property("checked")
+				var programfilter = d3.selectAll(("input[name='programselect']:checked")).property("value")
+					//0 if all, 1 if specific
+
+				//Filter the data appropriately based on those settings
+				filtereddata = (data[1])
+
+				if (recentgradsfilter==false) {
+					filtereddata = filtereddata.filter(d => (d.group!="Recent Graduate"))
+				}
+
+				if (recentgradsfilter==true) {
+					if (pastfivefilter==0) {
+						filtereddata = filtereddata.filter(d => (d.last3to5years==0))
+					}
+				}
+
+				if (nearcompletersfilter==false) {
+					filtereddata = filtereddata.filter(d => (d.group!="Near Completer"))
+				}
+
+				if (aasfilter==false) {
+					filtereddata = filtereddata.filter(d => (d.deglvl!="AAS"))
+				}
+
+				if (certfilter==false) {
+					filtereddata = filtereddata.filter(d => (d.deglvl!="CERT"))
+				}
+
+				if (cscfilter==false) {
+					filtereddata = filtereddata.filter(d => (d.deglvl!="CSC"))
+				}
+
+				if (programfilter==1) {
+					for(var i=0; i < programlist.length; i++) {
+						var testing = ("input[name='programselect" + i + "']")
+						var specificcheck = d3.selectAll(testing).property("checked")
+
+						var specificname = d3.selectAll(testing).property("value")
+						if(specificcheck==false) {
+							filtereddata = filtereddata.filter(d => (d.curr_text!=specificname))
+						}
+					}
+				}
+
+				//Save a default dataset on first draw
+				if (drawcount==1) {
+					defaultdata = [data[0], filtereddata]
+				}
+
+				//Catch it if this is an empty selection; if so, hide all the graphs and show the error button
+				if (filtereddata.length==0) {
+					filtereddata = defaultdata[1]
+					d3.selectAll(".errorhide")
+						.style("display", "none")
+					d3.selectAll(".errormessage")
+						.style("display", "block")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+				} else {
+					d3.selectAll(".errorhide")
+						.style("display", "block")
+					d3.selectAll(".errormessage")
+						.style("display", "none")
+						.transition()
+						.duration(300)
+						.style("opacity", "0")
+				}
+
+				//Make mini arrays of filtered, area-level info:
+				casecounts = d3.rollup(defaultdata[1], v => d3.mean(v, d => d.totalcases), d => d.college)
+				studentcounts = d3.rollup(filtereddata, v => d3.sum(v, d => d.count), d => d.college)
+				serviceareas = d3.rollup(defaultdata[1], v => v[1].serving, d => d.college)
+				coviddate = d3.rollup(defaultdata[1], v => v[1].date, d => d.college).get("Blue Ridge")
+				covidperstudent = d3.rollup(filtereddata, v => (d3.mean(v, d => d.totalcases))/(d3.sum(v, d => d.count)), d => d.college)
+
+				statecasecounts = d3.sum(casecounts.values())
+				statestudentcounts = d3.sum(studentcounts.values())
+				statecovidperstudent = roundtwo(statecasecounts/statestudentcounts)
+
+				//Draw all the graphs using filtered data
+				mapcolorscale(studentcounts);
+				mapdata(data[0]);
+				maplegend();
+				if (selectedarea=="") {
+					defaultmaptext()
+				} else {
+					updatemaptext(selectedarea)
+				}
+				drawdonuts(filtereddata)
+
+				//This function sets the color scale for the map and map legend
+				function mapcolorscale(data) {
+					//Set min and max for the map color scale
+					max = d3.max(data.values());
+					min = 0
+
+					//Override the max if, based on the selection of students, no area has more than 20 students so that the scale doesn't get overly compressed by a small max value
+					if (max < 20) {
+						max = 20
+					}
+
+					//Set color function using min + max values
+					myColor = d3.scaleSequential()
+						.domain([min,max])
+						.interpolator(d3.interpolateBlues)
+
+					//Set same scale for scale legend
+					xScale = d3.scaleLinear()
+						.range([extent.left, extent.right])
+						.domain([min, max]);
+				}
+
+				//This function creates the underlying map, coloring it in based on mapcolorscale using provided data, and then creates the bubble map overlay for COVID cases
+				function mapdata(mapdata) {
+
+					//Thanks to Yan Holtz for super helpful base code on heatmaps and tooltips
+					//Here: https://www.d3-graph-gallery.com/graph/heatmap_style.html
+					//And also to Adam Janes for code on processing geojson data in d3v5
+					//Here: https://bl.ocks.org/adamjanes/6cf85a4fd79e122695ebde7d41fe327f
+
+					//Clear out any pre-existing map graphics if there are any due to map updating/redrawing
+					mapsvg.selectAll("#mapgroup").remove();
+					mapsvg.selectAll("#bubblegroup").remove()
+					mapsvg.selectAll(".bubblelegend").remove()
+
+					//Set the projection and fit the map to the window size pulled during the setmapsize() function
+					var projection = d3.geoMercator()
+						.fitExtent([[extent.left, extent.top],[extent.right, extent.bottom]], mapdata);
+
+					var vccspath = d3.geoPath()
+						.projection(projection);
+
+					//Start making the map
+					mapsvg.append("g")
+						.attr("id", "mapgroup")
+						.selectAll("path")
+						.data(mapdata.features)
+						.enter()
+						.append("path")
+						.attr("id", "newmaps")
+						.attr("d", vccspath)
+						.style("stroke", "#dedede")
+						.style("stroke-width", "1px")
+						//Start it invisible so we can fade it in nicely later
+						.style("opacity", "0")
+						//Start fancy footwork to color in the regions according to the scale and the selected area logic
+						.style("fill", function(d) { 
+							//If something is already selected, color it in with the gray
+							if (selectedarea==d.properties["VCCS_Name"]) {
+								return "#adadad"
+							//If there's no row in the data for the currently highlighted area, that means it implicitly has a value of zero; color it in accordingly
+							} else if (studentcounts.get(d.properties["VCCS_Name"]) == undefined) {
+								return myColor(0)
+							//And if nothing is selected, color it in using the myColor scale we set in the mapcolorscale() function
+							} else {
+								return myColor(studentcounts.get(d.properties["VCCS_Name"]))
+							}
+						})
+						.classed("selectedareapath", function(d){
+							//When redrawing, we want to ensure the selectedarea, if any, has the selected area class so behavior later on relying on it works properly
+							if (selectedarea==d.properties["VCCS_Name"]) {
+								return true
+							} else {
+								return false
+							}
+						})
+						.on("mouseover", mapmouseover)
+						.on("mouseleave", mapmouseleave)
+						.on("click", mapclick);
+
+					//Fade in the map areas smoothly
+					mapsvg.selectAll("#newmaps").transition().duration(500).style("opacity", "1")
+
+					//Draw COVID cases as bubbles
+					//Thanks to Mike Bostock for helpful code tutorials to base this off of
+					//Here: https://observablehq.com/@d3/bubble-map
+
+					//Set min and max values according to the COVID data
+					bubblemax = roundUp(d3.max(casecounts.values()), -2)
+					bubblemin = d3.min(casecounts.values())
+
+					//Set the max bubble radius/size according to the window size so it doesn't become overwhelmingly large
+					maxbubbleradius = 2.5*vw
+
+					radius = d3.scaleSqrt()
+						.domain([bubblemin, bubblemax])
+						.range([2, maxbubbleradius]);
+
+					//Start drawing the bubbles
+					mapsvg.append("g")
+						.attr("id","bubblegroup")
+						.selectAll("circle")
+						.data(cleandata[0].features)
+						.enter()
+						.append("circle")
+						.attr("id", "newcircles")
+						.attr("transform", function(d) {
+							return "translate(" + vccspath.centroid(d) + ")";
+						})
+						.style("opacity", "0")
+						.attr("r", function(d) {
+							return radius(casecounts.get(d.properties["VCCS_Name"]))
+						})
+						.style("fill","#cb181d")
+						.style("stroke","white")
+						.style("stroke-width", "1px")
+						.style("pointer-events","none")
+
+					//Fade them in nicely
+					d3.selectAll("#newcircles")
+						.transition()
+						.duration(500)
+						.style("opacity", "0.8")
+
+					//Start drawing the bubble legend
+					var bubblelegend = mapsvg.append("g")
+						.attr("class", "bubblelegend")
+						.attr("transform", "translate(" + (width * (3.2/4)) + "," + (height/4) + ")")
+					
+					//Set the legend values so they're relative to the maximum value of COVID cases, and then round them to nice hundreds. roundDown() is a custom function I set below
+					var bubblelegenddata = bubblelegend.selectAll("g")
+						.data([roundDown(bubblemax/10, -2), roundDown(bubblemax/2, -2), bubblemax])
+						.enter()
+						.append("g")
+
+					bubblelegenddata.append("circle")
+						.attr("cy", function(d) { return -radius(d); })
+						.attr("r", radius)
+						.style("fill", "none")
+						.style("stroke", "#666")
+						.style("stroke-width", "1px")
+
+					//Put the values next to the legend circles
+					bubblelegenddata.append("text")
+						.attr("x", (1.1*maxbubbleradius))
+						.attr("y", function(d, i) { 
+							//If the bubbles are of a certain size, set the text next to them
+							if (maxbubbleradius/2.8 > em){
+								return (-radius(100)) + (-0.5 * em) + ((-maxbubbleradius/2.8) * i)
+							//If the bubbles are too small, just prevent text overlap
+							} else {
+								return (-radius(100)) + (-0.5 * em) + ((-0.8 * em) * i)
+							}
+						})
+						.attr("dy", "1em")
+						.text(d3.format(",.0f"))
+						.style("text-anchor","start")
+						.style("fill", "#666")
+						.style("font-size", function(d) {
+							//Change font size dynamically based on window size
+							if (vw < 10) {
+								return "0.8em"
+							} else {
+								return "1em"
+							}
+						})
+
+					//Add the bubble legend title
+					bubblelegend.append("text")
+						.text("COVID Cases")
+						.attr("x", (maxbubbleradius * 0.3))
+						.attr("y", (-maxbubbleradius * (2.3)))
+						.style("text-anchor","middle")
+						.style("fill", "#666")
+
+					//Add circle and text to show scale of hover-over area values
+					bubblelegend.append("circle")
+						.attr("id", "bubblelegendhovercircle")
+						//Only assign a centerpoint if an area is already selected
+						.attr("cy", function () {
+							if (selectedarea==""){
+								return 0
+							} else {
+								return -radius(casecounts.get(selectedarea))
+							}
+						})
+						//Only assign a radius if an area is already selected
+						.attr("r", function () {
+							if (selectedarea==""){
+								return 0
+							} else {
+								return radius(casecounts.get(selectedarea))
+							}
+						})
+						.style("fill", "none")
+						.style("stroke", "#cb181d")
+						.style("stroke-width", "1px")
+						//Only make visible if an area is already selected
+						.style("opacity", function() {
+							if (selectedarea==""){
+								return "0"
+							} else {
+								return "1"
+							}
+						})
+
+					bubblelegend.append("text")
+						.attr("id", "bubblelegendhovertext")
+						.attr("x", 0)
+						.attr("y", 1*em)
+						.text(function() {
+							if (selectedarea==""){
+								return ""
+							} else {
+								return roundwhole(casecounts.get(selectedarea))
+							}
+						})
+						.style("opacity", function() {
+							if (selectedarea==""){
+								return "0"
+							} else {
+								return "1"
+							}
+						})
+						.style("text-anchor","middle")
+						.style("fill", "#cb181d")
+
+				}
+
+				//This function sets up the bottom slider legend for the map
+				function maplegend() {
+					//Remove any old scale
+					scalelegend.selectAll("#legendRectnew")
+						.remove()
+					scalelegend.selectAll("#gradientdefs")
+						.remove()
+					scalelegend.selectAll("#legendaxisnew")
+						.remove()
+					scalelegend.selectAll("#scaleslider")
+						.remove()
+
+					//Reset all the positions of the maplegend to be responsive to window scale
+					d3.select("#scalelegend")
+						.attr("width", width)
+
+					d3.select("#scalesvg")
+						.attr("width", width)
+
+					d3.selectAll(".scalelower")
+						.attr("x", extent.left - (1.2*vw))
+
+					d3.selectAll(".scalehigher")
+						.attr("x", extent.right + (1*vw))
+
+					//Calculate the stop points for the horizontal scale gradient
+					//Thanks to Nadieh Bremer's code base for the simple linear color scale legend code
+					//Here: http://bl.ocks.org/nbremer/62cf60e116ae821c06602793d265eaf6
+					var numStops = 5;
+					countRange = xScale.domain();
+					countRange[2] = countRange[1] - countRange[0];
+					countPoint = [];
+
+					for(var i = 0; i < numStops; i++) {
+						countPoint.push(i * countRange[2]/(numStops-1) + countRange[0]);
+					}
+
+					//Create the gradient
+					scalelegend
+						.append("defs")
+						.attr("id", "gradientdefs")
+						.append("linearGradient")
+						.attr("id", "legend-students")
+						.attr("x1", "0%").attr("y1", "0%")
+						.attr("x2", "100%").attr("y2", "0%")
+						.selectAll("stop") 
+						.data(d3.range(numStops))
+						.enter().append("stop") 
+						.attr("offset", function(d,i) { 
+							return xScale( countPoint[i] )/width;
+						})	 
+						.attr("stop-color", function(d,i) { 
+							return myColor( countPoint[i] ); 
+						});
+
+
+					//Draw the rectangle for the scale, and map the gradient onto it
+					scalelegend.append("rect")
+						.attr("id", "legendRectnew")
+						.attr("x", extent.left)
+						.attr("y", 20)
+						.attr("rx", 4)
+						.attr("ry", 4)
+						.attr("width", (extent.right-extent.left))
+						.attr("height", 20)
+						.style("fill", "url(#legend-students)");
+
+					//Define axis labels
+					var xAxis = d3.axisBottom(xScale).tickSize(5)
+
+					//Draw the new axis
+					scalelegend.append("g")
+						.attr("id", "legendaxisnew")
+						.attr("transform", "translate(0," + 40 + ")")
+						.style("opacity",0)
+						.style("font-size", "1em")
+						.call(xAxis);
+
+					//Set the heights of the "Fewer Students" and "More Students" accordingly
+					scalelegend.selectAll("#scalelower1")
+						.attr("y", 28)
+						.style("opacity", 1)
+					scalelegend.selectAll("#scalelower2")
+						.attr("y", 28 + 1 * em)
+						.style("opacity", 1)
+					scalelegend.selectAll("#scalehigher1")
+						.attr("y", 28)
+						.style("opacity", 1)
+					scalelegend.selectAll("#scalehigher2")
+						.attr("y", 28 + 1 * em)
+						.style("opacity", 1)
+
+					//Set all the colors
+					scalelegend.selectAll("#legendaxisnew line")
+						.attr("stroke", "#666")
+					scalelegend.selectAll("#legendaxisnew path")
+						.attr("stroke", "#666")
+
+					//Fade it in nicely
+					scalelegend.selectAll("#legendaxisnew")
+						.transition(300)
+						.style("opacity", 1)
+
+						//make the scale slider icon
+					var scalebar = scalelegend.append("rect")
+						.attr("id","scaleslider")
+						.style("opacity", function() {
+							if (selectedarea=="") {
+								return 0
+							} else {
+								return 1
+							}
+						})
+						//Set the starting point for the slider
+						.attr("x", function() {
+							var slidercheck = studentcounts.get(selectedarea)
+
+							//If the area doesn't have a value, it is missing from the data and implicitly zero based on how we ran our analysis
+							if (slidercheck==undefined) {
+								slidercheck=0
+							}
+
+							//If an area isn't selected, set it in the middle arbitrarily
+							if (selectedarea=="") {
+								return (margin.left+width+margin.right)/2
+							//If an area is selected, set it to the right value
+							} else {
+								return xScale(slidercheck)
+							}
+						})
+						.attr("y", 10)
+						.attr("rx", 4)
+						.attr("ry", 4)
+						.attr("width", 2)
+						.attr("height", 30)
+				}
+
+				//This function sets the map tooltip text to display statewide aggregates, and runs only if no area is currently selected
+				function defaultmaptext() {
+					//Make sure the sizes are correct for the window
+					d3.selectAll("#maptooltipobject")
+						.attr("width", width/3)
+						.attr("height", height)
+						.attr("transform", "translate(" + (extent.left - 4*vw) + "," + extent.top + ")")
+
+					//Fade it in nicely if it's faded out
+					d3.selectAll(".maptext")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+
+					maptooltiptext
+						.html(function() {
+							return "<div><span class='boldtext'>Statewide Data</span><div style='margin-left:2vw'>" 
+							+ "<p><span class='boldtext'>Selected Student Count:</span> " + roundwhole(statestudentcounts) + "</p>"
+							+ "<div class='dividerlinetooltip'></div>"
+							+ "<p><span class='boldtext'>COVID-19 Cases (" + coviddate + "): </span>" + roundwhole(statecasecounts) + "</p>"
+							+ "<p><span class='boldtext'>Cases per Selected Student: </span>" + statecovidperstudent + "</p>"
+							+ "</div></div>"
+						})
+						.style("font-size", function() {
+							if (vw < 10) {
+								return "0.8em"
+							} else {
+								return "1em"
+							}
+						})
+				}
+
+				//This function fills in the map tooltip text according to the currently highlighted or selected area
+				function updatemaptext(data) {
+					d3.selectAll("#maptooltipobject")
+						.attr("width", width/3)
+						.attr("height", height)
+						.attr("transform", "translate(" + (extent.left - 4*vw) + "," + extent.top + ")")
+
+					d3.selectAll(".maptext")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+
+					maptooltiptext
+						.html(function() {
+							var namedisplay = data
+							var casedisplay = casecounts.get(data)
+							var countsdisplay = studentcounts.get(data)
+							var covidperstudentdisplay = roundtwo(covidperstudent.get(data))
+							var serviceareasdisplay = serviceareas.get(data)
+
+							//If the area doesn't have a value, it is missing from the data and implicitly zero based on how we ran our analysis
+							if (countsdisplay==undefined) {
+								countsdisplay = 0
+								covidperstudentdisplay = "--"
+							}
+
+							return "<div><span class='boldtext'>College Region:</span> " + namedisplay
+							//Minor work to replace semicolons with commas in the service area display
+							+ "<p><span class='boldtext'>Service Area: </span><span style='font-size:0.9em;'>" + (serviceareasdisplay.replace(/;/g, ",")) + "</span></p>"
+							+ "<p><span class='boldtext'>Selected Student Count:</span> " + countsdisplay + "</p>"
+							+ "<div class='dividerlinetooltip'></div>"
+							+ "<p><span class='boldtext'>COVID-19 Cases (" + coviddate + "): </span>" + roundwhole(casedisplay)
+							+ "<p><span class='boldtext'>Cases per Selected Student: </span>" + covidperstudentdisplay + "</p>"
+							+ "</div>"
+						})
+						.style("font-size", function() {
+							if (vw < 10) {
+								return "0.8em"
+							} else {
+								return "1em"
+							}
+						})
+				}
+
+				//This function runs whenever a region on the map is moused over; highlights the region, sets the slider position, and shows new text on the tooltip if no region is currently selected
+				function mapmouseover(d) {
+					//Only update the tooltip and slider if no area is currently selected
+					if (selectedarea=="") {
+						updatemaptext(d.properties["VCCS_Name"])
+
+						var slidercheck = studentcounts.get(d.properties["VCCS_Name"])
+
+						//If the area doesn't have a value, it is missing from the data and implicitly zero based on how we ran our analysis
+						if (slidercheck==undefined) {
+							slidercheck=0
+						}
+
+						//set the slider in the right place if the area does have a value
+						scalelegend.select("#scaleslider")
+							.transition()
+							.duration(600)
+							.style("opacity", 1)
+							.style("fill", "black")
+							.attr("x", function(x) {
+								return xScale(slidercheck)
+							})
+
+						var bubblecheck = casecounts.get(d.properties["VCCS_Name"])
+
+						//Make the hover-over legend circle visible, set size, and set text
+						d3.selectAll("#bubblelegendhovercircle")
+							.attr("cy", function() { return -radius(bubblecheck); })
+							.attr("r", radius(bubblecheck))
+							.transition()
+							.duration(300)
+							.style("opacity", "1")
+
+						d3.selectAll("#bubblelegendhovertext")
+							.text(function() {
+								return roundwhole(bubblecheck)
+							})
+							.transition()
+							.duration(300)
+							.style("opacity", "1")
+					}
+
+					//If an area is already selected, just highlight the region
+					if (selectedarea!=d.properties["VCCS_Name"]) {
+						d3.select(this)
+							.transition()
+							.duration(150)
+							.style("stroke", "#dedede")
+							.style("opacity", .6)
+					}
+				}
+
+				//This function just undo's the mapmouseover function and sets things back to default when your mouse leaves it
+				function mapmouseleave(d) {
+					if (selectedarea=="") {
+						defaultmaptext()
+
+						//make the slider invisible again
+						scalelegend.select("#scaleslider")
+							.transition()
+							.duration(150)
+							.style("opacity", 0)
+
+						//make the bubble radius hover legend and text invisible again
+						d3.selectAll("#bubblelegendhovercircle")
+							.transition()
+							.duration(150)
+							.style("opacity", "0")
+
+						d3.selectAll("#bubblelegendhovertext")
+							.transition()
+							.duration(150)
+							.style("opacity", "0")
+					}
+
+					if (selectedarea!=d.properties["VCCS_Name"]) {
+						d3.select(this)
+							.transition()
+							.duration(150)
+							.style("opacity", 1)
+					}
+				}
+
+				//Function that runs when you click on a region to select or deselect it
+				function mapclick(d) {
+					//This behavior runs if something on the map is selected, and the user clicks it again to deselect it
+					if (selectedarea==d.properties["VCCS_Name"]) {
+						selectedarea=""
+
+						d3.select(this)
+							.transition()
+							.duration(150)
+							.style("fill", function(d) { 
+								if (studentcounts.get(d.properties["VCCS_Name"]) == undefined) {
+									return myColor(0)
+								} else {
+									return myColor(studentcounts.get(d.properties["VCCS_Name"]))
+								}
+							})
+
+						d3.select(this)
+							.classed("selectedareapath", false)
+
+						d3.selectAll(".breakdowntooltiptext")
+							.html(breakdowntooltipnoselection)
+							
+						drawdonuts(filtereddata)
+
+					//This behavior runs if something on the map is selected, but the user clicks on something else
+					} else if (selectedarea!=d.properties["VCCS_Name"] && selectedarea!="") {
+						//First deselect the old one
+						var selectedareaold = selectedarea
+						selectedarea=d.properties["VCCS_Name"]
+
+						d3.selectAll(".selectedareapath")
+							.transition()
+							.duration(150)
+							.style("fill", function(d) { 
+								if (studentcounts.get(selectedareaold) == undefined) {
+									return myColor(0)
+								} else {
+									return myColor(studentcounts.get(selectedareaold))
+								}
+							})
+
+						d3.selectAll(".selectedareapath")
+							.classed("selectedareapath", false)
+
+						//Then update and add behaviors for regular click
+						d3.select(this)
+							.transition()
+							.duration(150)
+							.style("opacity", "1")
+							.style("fill", "#adadad")
+
+						d3.select(this)
+							.classed("selectedareapath", true)
+
+						scalelegend.select("#scaleslider")
+							.transition()
+							.duration(600)
+							.style("opacity", 1)
+							.style("fill", "black")
+							.attr("x", function(x) {
+								var slidercheck = studentcounts.get(selectedarea)
+
+								//If the area doesn't have a value, it is missing from the data and implicitly zero based on how we ran our analysis
+								if (slidercheck==undefined) {
+									slidercheck=0
+								}
+
+								return xScale(slidercheck)
+							})
+
+						breakdowntooltipvalidselection = "You've selected the <span class='boldtext'>" + selectedarea + "</span> region. Hover over the breakdown charts below for more detailed information, or click the same region again to deselect it"
+
+						d3.selectAll(".breakdowntooltiptext")
+							.html(breakdowntooltipvalidselection )
+
+						updatemaptext(selectedarea)
+						drawdonuts(filtereddata)
+
+					//This behavior runs if nothing on the map is selected
+					} else {
+						selectedarea=d.properties["VCCS_Name"]
+						breakdowntooltipvalidselection = "You've selected the <span class='boldtext'>" + selectedarea + "</span> region. Hover over the breakdown charts below for more detailed information, or click the same region again to deselect it"
+
+						d3.select(this)
+							.transition()
+							.duration(150)
+							.style("opacity", "1")
+							.style("fill", "#adadad")
+
+						d3.select(this)
+							.classed("selectedareapath", true)
+
+						d3.selectAll(".breakdowntooltiptext")
+							.html(breakdowntooltipvalidselection )
+
+						drawdonuts(filtereddata)
+					}
+				}
+			}
+
+			//This function draws the breakdown donuts in the bottom panel
+			//Thanks again to Yan Holtz for the great tutorial and base code
+			//Here: https://www.d3-graph-gallery.com/graph/donut_basic.html
+			function drawdonuts(data) {
+				//Clear out old chart if there is one
+				d3.selectAll("#newslices")
+					.remove()
+				d3.selectAll("#newslicelines")
+					.remove()
+				d3.selectAll("#newslicelabels")
+					.remove()
+
+				// Set the width of the donut svgs according to the window size
+				var donutwidth = (width * 0.45)
+				var donutheight = (width * 0.20)
+
+				//Set the radius of the donuts based on the donut svgs
+				var radius = (donutwidth * 0.3)
+
+				// append the svg objects to the right divs and position them
+				var donut1a = donut1
+					.attr("width", donutwidth)
+					.attr("height", donutheight)
+					.append("g")
+					.attr("transform", "translate(" + (donutwidth * 0.5) + "," + (donutheight * 0.5) + ")");
+
+				var donut2a = donut2
+					.attr("width", donutwidth)
+					.attr("height", donutheight)
+					.append("g")
+					.attr("transform", "translate(" + (donutwidth * 0.5) + "," + (donutheight * 0.5) + ")");
+
+				var donut3a = donut3
+					.attr("width", donutwidth * 2)
+					.attr("height", donutheight)
+					.append("g")
+					.attr("transform", "translate(" + (donutwidth) + "," + (donutheight * 0.5) + ")");
+
+				// set the color scale
+				var color = d3.scaleOrdinal()
+					.domain(["Near Completer", "Recent Graduate", "CERT", "AAS", "CSC", "Nursing", "Veterinary Technology", "Emergency Medical Services", "Other", "Human Services"])
+					.range(d3.schemeTableau10);
+
+				// The arc generator
+				var arc = d3.arc()
+					.innerRadius(radius * 0.25)				 // This is the size of the donut hole
+					.outerRadius(radius * 0.5)
+
+				// Two arcs, innerarc and outerarc, that won't be drawn. Just for labels and line positioning
+				var innerarc = d3.arc()
+					.innerRadius(radius * 0.50)				 // This is the size of the donut hole
+					.outerRadius(radius * 0.50)
+
+				var outerarc = d3.arc()
+					.innerRadius(radius * 0.55)
+					.outerRadius(radius * 0.55)
+
+				// Compute the position of each group on the pie:
+				var pie = d3.pie()
+					.sort(null) // Do not sort group by size
+					.value(function(d) {return d.value; })
+
+				// Create empty data for blank donuts if the region selected is empty
+				var blankdata = {a: 100}
+				var blankdata_ready = pie(d3.entries(blankdata))
+
+				//Drawing function for blank donuts 
+				function blankdonut(donutsvg) {
+					donutsvg
+						.selectAll('allSlices')
+						.data(blankdata_ready)
+						.enter()
+						.append('path')
+						.attr("id","newslices")
+						.attr('d', arc)
+						.attr('fill', "#adadad")
+						.attr("stroke", "white")
+						.style("stroke-width", "2px")
+						.style("opacity", 0)
+				}
+
+				//Start compiling the relevant data for drawing the donuts based on the selection on the side panel, and the selected area
+				var donutdata = []
+
+				//If an area is selected, get the data only for that area
+				if (selectedarea!="") {
+					donutdata = filtereddata.filter(d => (d.college==selectedarea))
+					var nonzerostudents = donutdata.length
+				//Otherwise, just collapse all the data across all the areas to get the statewide figures
+				} else {
+					donutdata = filtereddata.filter(d => (d.college!=""))
+				}
+
+				//Check if there are any obs in the selected area and selected student population
+				//If so, draw donuts appropriately
+				if (nonzerostudents!=0) {
+					var selectedareadisplay = ""
+
+					if (selectedarea!="") {
+						selectedareadisplay = "In the <span class='boldtext'>" + selectedarea + "</span> area, "
+						d3.selectAll(".breakdowntooltiptext")
+							.html(breakdowntooltipvalidselection)
+					} else {
+						selectedareadisplay = "<span class='boldtext'>Across Virginia</span>, "
+					}
+
+					// Create correctly filtered, collapsed data for each donut
+					var groupdonutdata = d3.rollup(donutdata, v => d3.sum(v, d => d.count), d => d.group)
+					var groupdonutdata_ready = convertdonut(groupdonutdata)
+
+					//Filter program data, and also collapse into an other category as necessary
+					var programdonutdata = donutdata.filter(d => (d.count!=0))
+					programdonutdata = d3.rollup(programdonutdata, v => d3.sum(v, d => d.count), d => d.curr_text)
+					var othernecessary = 0
+					var otherstring = ""
+					var otherarray = []
+					var otherarray2 = []
+					var sumtest = d3.sum(programdonutdata.values())
+
+					//First check if there is more than one program that's too small by making a new array of small programs
+					for(let [key, val] of programdonutdata) {
+						if (val/sumtest < 0.06) {
+							otherarray2.push({name:key, value:(roundwhole((val/sumtest)*100))})
+						}
+					}
+
+					//If there's more than one, set up indicator and a string of program names
+					if (otherarray2.length > 1) {
+						othernecessary=1
+						var counter = 1
+
+						otherarray2.map(function(value, index) {
+							var otherthreshold = 0.01
+
+							//Get all the names and values of programs in the other category and put them into a nicely written string
+							//But only up to 4 programs so as not to flood the tooltip
+							if ((value.value/100 >= otherthreshold || index==0) && counter < 5) {
+								if (index==0) {
+									otherstring = value.name + " (" + value.value + "%)"
+								} else {
+									otherstring = otherstring + ", " + value.name + " (" + value.value + "%)"
+									counter = counter + 1
+								}
+							}
+						})
+					}
+
+					//Then construct a new array to graph on the pie chart, filtering programs into "other" as necessary. Don't do it if the other category isn't necessary, though
+					for(let [key, val] of programdonutdata) {
+						if (val/sumtest < 0.06 && othernecessary>=1) {
+							otherarray.push({name:"Other", value:val})
+						} else {
+							var keystring = String(key)
+							otherarray.push({name:keystring, value:val})
+						}
+					}
+
+					//Collapse the data by program for display
+					otherarray = d3.rollup(otherarray, v => d3.sum(v, d => d.value), d => d.name)
+					var programdonutdata_ready = convertdonut(otherarray)
+
+					//Collapse the data by degree for display
+					var degreedonutdata = d3.rollup(donutdata, v => d3.sum(v, d => d.count), d => d.deglvl)
+					var degreedonutdata_ready = convertdonut(degreedonutdata)
+
+					//Actually render the donuts using the data now
+					renderdonut(donut1a, groupdonutdata_ready, "group")
+					renderdonut(donut2a, programdonutdata_ready, "program")
+					renderdonut(donut3a, degreedonutdata_ready, "degree")
+
+					//Fade things in nice and smoothly
+					d3.selectAll("#newslices")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+					d3.selectAll("#newslicelines")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+					d3.selectAll(".donutlabeltext")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+
+					//This function just takes the data and prepares it in the format that the donut graphs need
+					function convertdonut(data) {
+						var array = []
+						for(let [key, val] of data) {
+							var keystring = String(key)
+							array.push({name:keystring, value:val})
+						}
+
+						var array_ready = pie(Array.from(array))
+						return array_ready
+					}
+
+					//This function draws the lines that connect the sections of the donuts to their appropriate labels
+					function getpolylines(data) {
+						var posA = innerarc.centroid(data) // line insertion in the slice
+						var posB = outerarc.centroid(data) // line break: we use the other arc generator that has been built only for that
+						var posC = outerarc.centroid(data); // Label position = almost the same as posB
+						var midangle = data.startAngle + (data.endAngle - data.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+						posC[0] = radius * 0.55 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+						return [posA, posB, posC]
+					}
+
+					//This function figures out where to put the labels for each section of the donut
+					function getlabellocations(data) {
+						var pos = outerarc.centroid(data);
+						var midangle = data.startAngle + (data.endAngle - data.startAngle) / 2
+						pos[0] = radius * 0.6 * (midangle < Math.PI ? 1 : -1);
+
+						//Adjust for text formatting vertically
+						pos[1] = pos[1] - 8
+
+						//Adjust for text formatting horizontally; based on which side of the donut the text is on
+						var midangle = data.startAngle + (data.endAngle - data.startAngle) / 2
+						if (midangle >= Math.PI) {
+							pos[0] = pos[0] - 11*vw
+						} 
+						return 'translate(' + pos + ')';
+					}
+
+					//This function sets the text-anchor property of each label according to which side of the donut it's on
+					function getlabelanchors(data) {
+						var midangle = data.startAngle + (data.endAngle - data.startAngle) / 2
+						return (midangle < Math.PI ? 'left' : 'right')
+					}
+
+					//This function actually draws the donuts!
+					function renderdonut(donutsvg, data, type) {
+						donutsvg
+							.selectAll('allSlices')
+							.data(data)
+							.enter()
+							.append('path')
+							.attr("id","newslices")
+							.attr('d', arc)
+							.attr("class", type)
+							.attr('fill', function(d){ return(color(d.data.name)) })
+							.attr("stroke", "white")
+							.style("stroke-width", "2px")
+							.style("opacity", 0)
+							.on("mouseover", donutmouseover)
+							.on("mouseleave", donutmouseleave)
+
+						// Add the polylines between chart and labels:
+						donutsvg
+							.selectAll('allPolylines')
+							.data(data)
+							.enter()
+							.append('polyline')
+							.attr("stroke", function(d){ return(color(d.data.name)) })
+							.attr("id","newslicelines")
+							.style("fill", "none")
+							.attr("stroke-width", 1)
+							.attr('points', function(d) {
+								return getpolylines(d)
+							})
+							.style("opacity", "0")
+
+						// Add the labels:
+						donutsvg
+							.selectAll('allLabels')
+							.data(data)
+							.enter()
+							.append('g')
+							.attr("x", 0)
+							.attr("y", 0)
+							.attr("width", 0)
+							.attr("height", 0)
+							.attr("id", "newslicelabels")
+							.attr('transform', function(d) {
+								return getlabellocations(d)
+							})
+							//I set it in a foreignObject so we can use HTML and wrap the text properly if it's too long
+							.append("foreignObject")
+							.attr("x", 0)
+							.attr("y", 0)
+							.attr("width", 12*vw)
+							.attr("height", 100)
+							.append("xhtml:div")
+							.attr("class", "donutlabeltext")
+							.html(function(d) {
+								//Some fancy footwork to back-calculate the percentages based on the calculated arc values in the converted data
+								var percentage = ((d.endAngle - d.startAngle)/(3.141592*2))*100
+								return "<div>" + d.data.name + " ("+ roundwhole(percentage) + "%)" + "</div>"
+							})
+							.style("width", function() {
+								return 11*vw + "px"
+							})
+							.style("display", "block")
+							.style('text-align', function(d) {
+								return getlabelanchors(d)
+							})
+							.style("opacity", "0")
+							.style("font-size", function() {
+								if (vw < 10) {
+									return "0.8em"
+								} else {
+									return "1em"
+								}
+							})
+
+						//This function highlights sections of the donuts as you hover over them, and also updates the breakdown tooltip with the right explainer text
+						function donutmouseover(d) {
+							updatedonuttext(d, this)
+
+							d3.select(this)
+								.transition()
+								.duration(150)
+								.style("opacity", .6)
+						}
+
+						//This function de-highlights the section as you stop hovering over, and resets the explainer text in the breakdown tooltip
+						function donutmouseleave(d) {
+							d3.select(this)
+								.transition()
+								.duration(150)
+								.style("opacity", 1)
+
+							if (selectedarea!="") {
+								d3.selectAll(".breakdowntooltiptext")
+									.html(breakdowntooltipvalidselection)
+							} else if (selectedarea=="") {
+								d3.selectAll(".breakdowntooltiptext")
+									.html(breakdowntooltipnoselection)
+							}
+						}
+
+						//This function sets the explainer text in the breakdown tooltip based on which donut you're hovering over, and its data
+						function updatedonuttext(data, thing) {
+							d3.selectAll(".breakdowntooltiptext")
+								.html(function() {
+									var percentage = roundwhole(((data.endAngle - data.startAngle)/(3.141592*2))*100)
+									var valuedisplay = roundwhole(data.data.value)
+									var sumtestdisplay = roundwhole(sumtest)
+
+									var type = d3.select(thing).attr("class")
+									if (type=="group") {
+										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected were in the <span class='boldtext'>" + data.data.name + "s</span> category in our analysis"
+									}
+									if (type=="program") {
+										if (data.data.name!="Other") {
+										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected were studying <span class='boldtext'>" + data.data.name + "</span>"
+										} else {
+										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected were studying a variety of <span class='boldtext'>other programs</span>, such as: " + otherstring
+										}
+									}
+
+									if (type=="degree") {
+										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected pursued a <span class='boldtext'>" + data.data.name + "</span> degree"
+									}
+								})
+						}
+					}
+				//Draw empty donuts if the selected area has no students to disaggregate
+				} else {	
+					blankdonut(donut1a)
+					blankdonut(donut2a)
+					blankdonut(donut3a)
+
+					d3.selectAll("#newslices")
+						.transition()
+						.duration(300)
+						.style("opacity", "1")
+
+					//Tell the user the selected area is empty and direct them appropriately
+					d3.selectAll(".breakdowntooltiptext")
+						.html(breakdowntooltipemptyselection)
+				}
+			}
+
+			//Generate the list of programs for the sidepanel selectors automatically using the data
+			function listprograms(cleandata) {
+				programlist = d3.rollup(cleandata[1], v => 0, d => d.curr_text);
+
+				var arraytest = []
+				for(let [key, val] of programlist) {
+					var keystring = String(key)
+					arraytest.push({name:keystring})
+				}
+
+				programlist = arraytest.sort((a, b) => d3.ascending(a.name, b.name))
+
+				var makelist = d3.select(".programselectfill")
+					.selectAll(".programselectfill")
+
+				makelist
+					.data(programlist)
+					.enter()
+					.append("div")
+					.attr("class","sidepanelitem programselectdivs")
+					.html(function (d, i) {
+						return "<div class='sidepanelitem'><input type='checkbox' name='programselect" + i + "' value='" + d.name + "' id=programselect" + i + "'> <label for='programselect" + i + "'> " + d.name + "</label>"
+					})
+
+				d3.selectAll(("input")).on("change", eventwatchers)
+			}
+
+			//Set the graph sizes and all the sizing variables relative to the window size
+			function setmapsize () {
+				vw = (document.documentElement.clientWidth)/100;
+				vh = (document.documentElement.clientHeight)/100;
+				
+				em = parseFloat(getComputedStyle(document.body).fontSize)
+
+				margin = {top: 0, right: 10, bottom: 4, left: 10};
+				width = (80 * vw);
+				height = (100 * vh);
+
+				//Set a minimum width to the graphics
+				if (width < 500) {
+					width = 500;
+				}
+
+				//Set a max height relative to the width
+				if (height > 0.4 * width) {
+					height = 0.4 * width;
+				}
+
+				//Need to set the breakdowntooltiparea size dynamically; too large and it looks awkward and takes up space
+				//Too small, and the tooltips overflow and overlap with the breakdown donuts
+				d3.selectAll("#breakdowntooltiparea")
+					.style("height", function() {
+						if (vw >= 10) {
+							return "5em"
+						} else if (vw >=6) {
+							return "6em"
+						} else {
+							return "7em"
+						}
+
+					})
+
+				//set extents for auto-resizing of map
+				extent = {top: (vh * margin.top), right: (width - (vw * margin.right)), bottom:(height), left: (vw * margin.left), }
+
+				//Update main map svg with new sizings
+				mapsvg = d3.select("#mapsvg")
+					.attr("width", width)
+					.attr("height", height)
+			}
+
+			//This function sets up the reset button in the side panel and redraws the graphs using default settings
+			function buttonreset() {
+				selectedarea=""
+
+				d3.selectAll(".selectedareapath")
+					.classed("selectedareapath", false)
+
+				d3.selectAll("input").property("checked", false)
+				d3.selectAll(".default").property("checked", true)
+
+				d3.selectAll(".breakdowntooltiptext")
+					.html(breakdowntooltipnoselection)
+				
+				drawmap(defaultdata)
+				drawdonuts(filtereddata)
+			}
+
+			//This function looks out for any changes to the side panel selectors and redraws the graphs
+			//Also hides the graduate cohort years if recent graduates is not selected,
+			//Or hides the specific programs if specific programs is not selected
+			function eventwatchers() {
+				Promise.all(promises).then(function() {
+
+					if (d3.select("#recentcheck").property("checked")) {
+						d3.select("#recentoptions")
+							.style("display", "block")
+					} else {
+						d3.select("#recentoptions")
+							.style("display", "none")
+					}
+
+					if (d3.select("#programspecific").property("checked")) {
+						d3.select("#programoptions")
+							.style("display", "block");
+					} else {
+						d3.select("#programoptions")
+							.style("display", "none");
+					}
+
+					setmapsize();
+					drawmap(cleandata)
+					drawdonuts(filtereddata)
+				})
+			}
+
+			//Thanks to Petr Hurtak on StackOverflow for the super easy function to round down/up
+			//Here: https://stackoverflow.com/a/21760326/13258812
+			function roundDown(number, decimals) {
+				decimals = decimals || 0;
+				return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
+			}
+
+			function roundUp(number, decimals) {
+				decimals = decimals || 0;
+				return ( Math.ceil( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
+			}
+
+		</script>
+
+	</body>
+
+</html>
