@@ -2,7 +2,7 @@
 
 <meta charset="utf-8">
 
-<!-- Version: 20-04-09 -->
+<!-- Version: 20-04-12 -->
 
 <!-- Load d3.js, array functions, and color palettes -->
 
@@ -38,6 +38,10 @@
 			.boldtext {
 				font-weight: bold;
 				color: #262626;
+			}
+
+			sup {
+				font-weight: normal;
 			}
 
 			/* CSS stylings generally in order of vertical appearance in the main panel */
@@ -78,8 +82,8 @@
 			}
 
 			.dividerlinetooltip {
-				margin-left:0vw;
-				margin-right:3vw;
+				margin-left:0.5vw;
+				margin-right:0.5vw;
 				margin-bottom:0.8em;
 				margin-top:0.8em;
 				border-bottom: 1px solid #666;
@@ -160,6 +164,10 @@
 				position: relative;
 				top: 28%;
 				left: 25%;
+			}
+
+			.tooltiprightalign {
+				text-align:right;
 			}
 
 			#newmaps:hover {
@@ -283,7 +291,7 @@
 			<div id="titlearea">
 
 				<p id="titlecopy">COVID-19 Health Workforce Recruiting Dashboard</p>
-				<div class="shortlink">(Shortlink: <a href="https://www.nudge4.org/covid19">www.nudge4.org/covid19</a>)</div>
+				<div class="shortlink">( Shortlink: <a href="https://www.nudge4.org/covid19">www.nudge4.org/covid19</a> )</div>
 
 				<p class="subtitletext">In partnership with the Virginia Community College System (VCCS), the Nudge4 Solutions Lab at the University of Virginia identified recent graduates of health care programs <span class="boldtext">who are not currently working in health care</span> and recently stopped-out health care students near completion who could <span class="boldtext">help fill critical workforce needs</span> in the face of the COVID-19 crisis. Additional details on the data and analysis we used to create this dashboard, as well as important caveats regarding its use, are available <a href="https://nudge4.org/covid19methodology" target="_blank"> here</a>.</span></p>
 
@@ -345,6 +353,12 @@
 				</table>
 			</div>
 
+			<div class="byline" style="text-align:left; margin-left:11vw">
+				<span class="boldtext"><sup>1</sup></span> Daily COVID-19 case data from the <a href="http://www.vdh.virginia.gov/coronavirus/" target="_blank">Virginia Department of Health</a>.
+				<br>
+				<span class="boldtext"><sup>2</sup></span> Data on general hospital beds by county collected and graciously shared by <a href="https://www.urban.org/research/publication/hospital-readiness-covid-19-analysis-bed-capacity-and-how-it-varies-across-country" target="_blank">Fredric Blavin & Diane Arnos (2020)</a> at the Urban Institute. Note that these estimates do not include specialty, children's, or federal hospitals (e.g. Department of Defense); please see their full article for more information.
+			</div>
+
 			<div class="dividerline preagreehide"></div>
 
 			<!-- begin byline -->
@@ -352,8 +366,8 @@
 				<p class="byline"><a href="https://nudge4.org" target="_blank"><img src="https://nudge4.org/wp-content/uploads/2016/08/Nudge4_headerlogo-01.png" alt="Nudge4 Logo" height="50" width="152" style="padding-bottom:13px;"></a><a href="https://vccs.edu" target="_blank"><img src="https://32odk5emep614s91y32i7ht1125-wpengine.netdna-ssl.com/wp-content/themes/vccs/images/vccs-logo.png" alt="VCCS Logo" height="70" width="137"></a><br>
 					Analysis and Visualization by the <a href="https://nudge4.org" target="_blank">Nudge4 Solutions Lab</a>, in partnership with the <a href="https://vccs.edu" target="_blank">Virginia Community College System</a>. <br>
 					For more information on this analysis, please contact <a href="mailto:info@nudge4.org">info@nudge4.org</a><br>
-				Dashboard Designer/Developer: Brian Heseung Kim (@brhkim on <a href = "https://brhkim.com/" target="_blank">Web</a>/<a href = "https://twitter.com/brhkim" target="_blank">Twitter</a>/<a href = "https://github.com/brhkim" target="_blank">GitHub</a>)</p>
-				
+				Dashboard Designer/Developer: Brian Heseung Kim (@brhkim on <a href = "https://brhkim.com/" target="_blank">Web</a>/<a href = "https://twitter.com/brhkim" target="_blank">Twitter</a>/<a href = "https://github.com/brhkim" target="_blank">GitHub</a>)<br>
+				Visualization code available on <a href = "https://github.com/brhkim/brhkim.github.io/blob/master/COVID%20Dashboard.html" target="_blank">GitHub</a>. Analytic code available upon request. Please request permission before reusing data.</p>
 			</div>
 
 		<!-- end main panel -->	
@@ -579,15 +593,19 @@
 
 				//Area-level filtered datasets
 			var casecounts = {}
+			var priorcasecounts = {}
+			var hospitalbeds = {}
+			var pop60 = {}
 			var studentcounts = {}
 			var serviceareas = {}
 			var coviddate = {}
-			var covidperstudent = {}
 
 				//State-level filtered datasets
 			var statecasecounts = {}
+			var statepriorcasecounts = {}
+			var statehospitalbeds = {}
+			var statepop60 = {}
 			var statestudentcounts = {}
-			var statecovidperstudent = {}
 			var programlist = {}
 
 				//Variable indicating which, if any, area is selected on the map
@@ -710,14 +728,18 @@
 
 				//Make mini arrays of filtered, area-level info:
 				casecounts = d3.rollup(defaultdata[1], v => d3.mean(v, d => d.totalcases), d => d.college)
+				priorcasecounts = d3.rollup(defaultdata[1], v => d3.mean(v, d => d.priorcases), d => d.college)
+				hospitalbeds = d3.rollup(defaultdata[1], v => d3.mean(v, d => d.hospitalbeds), d => d.college)
+				pop60 = d3.rollup(defaultdata[1], v => d3.mean(v, d => d.pop60), d => d.college)
 				studentcounts = d3.rollup(filtereddata, v => d3.sum(v, d => d.count), d => d.college)
 				serviceareas = d3.rollup(defaultdata[1], v => v[1].serving, d => d.college)
 				coviddate = d3.rollup(defaultdata[1], v => v[1].date, d => d.college).get("Blue Ridge")
-				covidperstudent = d3.rollup(filtereddata, v => (d3.mean(v, d => d.totalcases))/(d3.sum(v, d => d.count)), d => d.college)
 
 				statecasecounts = d3.sum(casecounts.values())
+				statepriorcasecounts = d3.sum(priorcasecounts.values())
+				statehospitalbeds = d3.sum(hospitalbeds.values())
+				statepop60 = d3.sum(pop60.values())
 				statestudentcounts = d3.sum(studentcounts.values())
-				statecovidperstudent = roundtwo(statecasecounts/statestudentcounts)
 
 				//Draw all the graphs using filtered data
 				mapcolorscale(studentcounts);
@@ -899,7 +921,7 @@
 
 					//Add the bubble legend title
 					bubblelegend.append("text")
-						.text("COVID Cases")
+						.text("Current COVID Cases")
 						.attr("x", (maxbubbleradius * 0.3))
 						.attr("y", (-maxbubbleradius * (2.3)))
 						.style("text-anchor","middle")
@@ -1112,15 +1134,32 @@
 
 					maptooltiptext
 						.html(function() {
-							return "<div><span class='boldtext'>Statewide Data</span><div style='margin-left:2vw'>" 
-							+ "<p><span class='boldtext'>Selected Student Count:</span> " + roundwhole(statestudentcounts) + "</p>"
+							return "<div><span class='boldtext'>Statewide Data</span>"
 							+ "<div class='dividerlinetooltip'></div>"
-							+ "<p><span class='boldtext'>COVID-19 Cases (" + coviddate + "): </span>" + roundwhole(statecasecounts) + "</p>"
-							+ "<p><span class='boldtext'>Cases per Selected Student: </span>" + statecovidperstudent + "</p>"
-							+ "</div></div>"
+							+ "<div class='tooltiprightalign'>"
+							+ "<table style='width:100%'>" 
+							+ "<tr>"
+							+ "<td class='boldtext'>Selected Student Count:</td>" 
+							+ "<td style='width:5em'>" + roundwhole(statestudentcounts) + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'><sup>1 </sup>COVID-19 Cases (" + coviddate + "):</td>" 
+							+ "<td>" + roundwhole(statecasecounts) + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'>COVID-19 Cases (3 days prior):</td>" 
+							+ "<td>" + roundwhole(statepriorcasecounts) + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'><sup>2 </sup>Hospital Beds:</td>" 
+							+ "<td>" + roundwhole(statehospitalbeds) + "</td>"
+							+ "</tr>"
+							+ "</table>"
+							+ "</div>"
+							+ "</div>"
 						})
 						.style("font-size", function() {
-							if (vw < 10) {
+							if (vw < 12) {
 								return "0.8em"
 							} else {
 								return "1em"
@@ -1144,27 +1183,46 @@
 						.html(function() {
 							var namedisplay = data
 							var casedisplay = casecounts.get(data)
+							var priorcasedisplay = priorcasecounts.get(data)
+							var hospitalbedsdisplay = hospitalbeds.get(data)
+							var pop60display = pop60.get(data)
 							var countsdisplay = studentcounts.get(data)
-							var covidperstudentdisplay = roundtwo(covidperstudent.get(data))
 							var serviceareasdisplay = serviceareas.get(data)
 
 							//If the area doesn't have a value, it is missing from the data and implicitly zero based on how we ran our analysis
 							if (countsdisplay==undefined) {
 								countsdisplay = 0
-								covidperstudentdisplay = "--"
 							}
 
 							return "<div><span class='boldtext'>College Region:</span> " + namedisplay
 							//Minor work to replace semicolons with commas in the service area display
-							+ "<p><span class='boldtext'>Service Area: </span><span style='font-size:0.9em;'>" + (serviceareasdisplay.replace(/;/g, ",")) + "</span></p>"
-							+ "<p><span class='boldtext'>Selected Student Count:</span> " + countsdisplay + "</p>"
 							+ "<div class='dividerlinetooltip'></div>"
-							+ "<p><span class='boldtext'>COVID-19 Cases (" + coviddate + "): </span>" + roundwhole(casedisplay)
-							+ "<p><span class='boldtext'>Cases per Selected Student: </span>" + covidperstudentdisplay + "</p>"
+							+ "<div class='tooltiprightalign'>"
+							+ "<table style='width:100%'>" 
+							+ "<tr>"
+							+ "<td class='boldtext'>Selected Student Count:</td>"
+							+ "<td style='width:5em'>" + countsdisplay + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'><sup>1 </sup>COVID-19 Cases (" + coviddate + "):</td>" 
+							+ "<td>" + roundwhole(casedisplay) + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'>COVID-19 Cases (3 days prior):</td>" 
+							+ "<td>" + roundwhole(priorcasedisplay) + "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td class='boldtext'><sup>2 </sup>Hospital Beds:</td>" 
+							+ "<td>" + roundwhole(hospitalbedsdisplay) + "</td>"
+							+ "</tr>"
+							+ "</table>"
+							+ "</div>"
+							+ "<div class='dividerlinetooltip'></div>"
+							+ "<p><span class='boldtext'>Service Area: </span><span style='font-size:0.9em;'>" + (serviceareasdisplay.replace(/;/g, ",")) + "</span></p>"
 							+ "</div>"
 						})
 						.style("font-size", function() {
-							if (vw < 10) {
+							if (vw < 12) {
 								return "0.8em"
 							} else {
 								return "1em"
