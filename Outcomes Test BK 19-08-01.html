@@ -215,7 +215,7 @@
 				.attr("text-anchor", "left")
 				.style("font-family", "Tahoma")
 				.style("fill", "#666")
-				.style("font-size", "10px")
+				.style("font-size", "1em")
 				.style("opacity", "0")
 				.text("Lower")
 
@@ -226,7 +226,7 @@
 				.attr("text-anchor", "right")
 				.style("font-family", "Tahoma")
 				.style("fill", "#666")
-				.style("font-size", "10px")
+				.style("font-size", "1em")
 				.style("opacity", "0")
 				.text("Higher")
 
@@ -476,7 +476,7 @@
 						.padding(0.05);
 
 					svg.select("#xaxis")
-						.style("font-size", "10px")
+						.style("font-size", "1em")
 						.attr("transform", "translate(0," + height + ")")
 						.call(d3.axisBottom(x).tickSize(0))
 						.selectAll("text")	
@@ -498,7 +498,7 @@
 						.padding(0.05);
 
 					svg.select("#yaxis")
-						.style("font-size", "10px")
+						.style("font-size", "1em")
 						.style("font-family", "Tahoma")
 						.call(d3.axisLeft(y).tickSize(0))
 						.selectAll("text")
