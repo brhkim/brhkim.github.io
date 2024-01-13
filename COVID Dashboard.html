@@ -2,7 +2,7 @@
 
 <meta charset="utf-8">
 
-<!-- Version: 20-04-12 -->
+<!-- Version: 20-04-13b -->
 
 <!-- Load d3.js, array functions, and color palettes -->
 
@@ -667,11 +667,15 @@
 					filtereddata = filtereddata.filter(d => (d.group!="Recent Graduate"))
 				}
 
+				console.log(pastfivefilter)
 				if (recentgradsfilter==true) {
 					if (pastfivefilter==0) {
 						filtereddata = filtereddata.filter(d => (d.last3to5years==0))
+						console.log("This filtering happened!")
 					}
 				}
+
+				
 
 				if (nearcompletersfilter==false) {
 					filtereddata = filtereddata.filter(d => (d.group!="Near Completer"))
@@ -1700,7 +1704,17 @@
 							.html(function(d) {
 								//Some fancy footwork to back-calculate the percentages based on the calculated arc values in the converted data
 								var percentage = ((d.endAngle - d.startAngle)/(3.141592*2))*100
-								return "<div>" + d.data.name + " ("+ roundwhole(percentage) + "%)" + "</div>"
+
+								//Add some specific renaming logic to remove acronyms on degree levels only
+								if (d.data.name=="AAS") {
+									return "<div>" + "Associate" + " ("+ roundwhole(percentage) + "%)" + "</div>"
+								} else if (d.data.name=="CERT") {
+									return "<div>" + "Certificate" + " ("+ roundwhole(percentage) + "%)" + "</div>"
+								} else if (d.data.name=="CSC") {
+									return "<div>" + "Career Studies Certificate" + " ("+ roundwhole(percentage) + "%)" + "</div>"
+								} else {
+									return "<div>" + d.data.name + " ("+ roundwhole(percentage) + "%)" + "</div>"
+								}
 							})
 							.style("width", function() {
 								return 11*vw + "px"
@@ -1763,9 +1777,17 @@
 										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected were studying a variety of <span class='boldtext'>other programs</span>, such as: " + otherstring
 										}
 									}
-
 									if (type=="degree") {
-										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected pursued a <span class='boldtext'>" + data.data.name + "</span> degree"
+										var degreedisplay
+										if (data.data.name=="AAS") {
+											degreedisplay="Associate degree"
+										} else if (data.data.name=="CERT") {
+											degreedisplay="Certificate"
+										} else if (data.data.name=="CSC") {
+											degreedisplay="Career Studies Certificate"
+										}
+
+										return selectedareadisplay + "<span class='boldtext'>" + percentage + "%</span> (" + valuedisplay + ") of the " + sumtestdisplay + " health students you selected pursued a <span class='boldtext'>" + degreedisplay + "</span>"
 									}
 								})
 						}
@@ -1871,7 +1893,7 @@
 				d3.selectAll(".breakdowntooltiptext")
 					.html(breakdowntooltipnoselection)
 				
-				drawmap(defaultdata)
+				drawmap(cleandata)
 				drawdonuts(filtereddata)
 			}
 
