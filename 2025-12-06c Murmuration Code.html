@@ -388,56 +388,6 @@
             <input type="range" id="chaos" min="0" max="5.0" step="0.1" value="0.5">
         </div>
 
-        <div class="control-group" data-tooltip="Max number of neighbors a bird checks. Lower is faster, higher is more accurate.">
-            <label>Neighbor Cap: <span id="val-neighbors" class="value-display">50</span></label>
-            <input type="range" id="neighbors" min="5" max="200" step="1" value="50">
-        </div>
-
-        <div class="control-group" data-tooltip="The baseline maximum velocity a bird can travel.">
-            <label>Base Speed: <span id="val-speed" class="value-display">0.6</span></label>
-            <input type="range" id="speed" min="0.1" max="5.0" step="0.1" value="0.6">
-        </div>
-
-        <div class="control-group" data-tooltip="Adds individuality. If set high, some birds are much faster/slower than others.">
-            <label>Speed Variance: <span id="val-variance" class="value-display">0.1</span></label>
-            <input type="range" id="variance" min="0" max="0.8" step="0.05" value="0.1">
-        </div>
-
-        <div class="control-group" data-tooltip="Determines how fast a bird can steer. Low = Heavy momentum. High = Agile.">
-            <label>Turn Agility: <span id="val-agility" class="value-display">0.030</span></label>
-            <input type="range" id="agility" min="0.001" max="0.05" step="0.001" value="0.03">
-        </div>
-
-        <div class="control-group" data-tooltip="Filters out jitter. High values mean birds resist changing their current turn direction, creating smooth arcs.">
-            <label>Steering Inertia: <span id="val-inertia" class="value-display">0.5</span></label>
-            <input type="range" id="inertia" min="0.0" max="0.98" step="0.01" value="0.5">
-        </div>
-
-        <div class="control-group" data-tooltip="Force pushing birds away from each other.">
-            <label>Separation: <span id="val-separation" class="value-display">1.5</span></label>
-            <input type="range" id="separation" min="0" max="5" step="0.1" value="1.5">
-        </div>
-
-        <div class="control-group" data-tooltip="Force steering birds in the same direction.">
-            <label>Alignment: <span id="val-alignment" class="value-display">1.0</span></label>
-            <input type="range" id="alignment" min="0" max="5" step="0.1" value="1.0">
-        </div>
-
-        <div class="control-group" data-tooltip="Force pulling birds to the center of the group.">
-            <label>Cohesion: <span id="val-cohesion" class="value-display">1.0</span></label>
-            <input type="range" id="cohesion" min="0" max="5" step="0.1" value="1.0">
-        </div>
-
-        <div class="control-group" data-tooltip="Perception radius. Lower is faster for CPU.">
-            <label>Visual Range: <span id="val-range" class="value-display">15</span></label>
-            <input type="range" id="range" min="5" max="40" step="1" value="15">
-        </div>
-
-        <div class="control-group" data-tooltip="Random turbulence factor.">
-            <label>Chaos Factor: <span id="val-chaos" class="value-display">0.0</span></label>
-            <input type="range" id="chaos" min="0" max="5.0" step="0.1" value="0.0">
-        </div>
-
         <div class="control-group" data-tooltip="Strength of manual push.">
             <label>Push Strength: <span id="val-pulse" class="value-display">2.0</span></label>
             <input type="range" id="pulse" min="0.5" max="50.0" step="0.5" value="2.0">
@@ -486,29 +436,6 @@
         <div class="control-group color-picker-group" data-tooltip="Distance fog color.">
             <label for="fog-color">Distance Fog Color</label>
             <input type="color" id="fog-color" value="#990000">
-        </div>
-
-        <div class="header-divider" style="margin-top: 20px; border-bottom: 1px solid #444;"></div>
-        <h1 style="margin-top:10px; margin-bottom:10px;">Appearance</h1>
-        
-        <div class="control-group" data-tooltip="Visual scale of birds.">
-            <label>Bird Size: <span id="val-scale" class="value-display">1.0</span></label>
-            <input type="range" id="scale" min="0.1" max="10.0" step="0.1" value="1.0">
-        </div>
-
-        <div class="control-group color-picker-group" data-tooltip="Background color.">
-            <label for="bg-color">Background Color</label>
-            <input type="color" id="bg-color" value="#050505">
-        </div>
-
-        <div class="control-group color-picker-group" data-tooltip="Bird color.">
-            <label for="bird-color">Bird Color</label>
-            <input type="color" id="bird-color" value="#ffffff">
-        </div>
-
-        <div class="control-group color-picker-group" data-tooltip="Distance fog color.">
-            <label for="fog-color">Distance Fog Color</label>
-            <input type="color" id="fog-color" value="#050505">
         </div>
 
         <div class="file-btn-group">
